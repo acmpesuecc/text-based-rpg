@@ -34,12 +34,6 @@ def get_room():
         get_monster()
 
 
-def typing(text):
-    for character in text:
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        time.sleep(0.05)
-
 # treasure box room
 def treasure_box():
     global gold
