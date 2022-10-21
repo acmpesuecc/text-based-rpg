@@ -762,6 +762,11 @@ def get_monster():
         # opp_att = random.randint(50, 60)
 
 
+def quit_screen():
+    quit_scr= Label(frame_monster_1, text="Game over")
+    quit_scr.pack()
+
+
 def get_bossmonster():
     global m
     global opp_hp
@@ -779,7 +784,7 @@ def get_bossmonster():
         m = 1
         # monster 1
         # Attack in range of 0-10
-        L_m1_intro = Label(frame_monster_1, text="You have to face Goblin\n"
+        L_m1_intro = Label(frame_monster_1, text="You have to face Demon Slayer\n"
                                                  "The match starts. You get the first chance\n")
         L_m1_intro.pack()
         fight_monster()
@@ -789,12 +794,12 @@ def get_bossmonster():
         m = 2
         # monster 2
         # Attack in range of 10-20
-        L_m2_intro = Label(frame_monster_1, text="You have to face Werewolf\n"
+        L_m2_intro = Label(frame_monster_1, text="You have to face Big Tooth\n"
                                                  "The match starts. You get the first chance\n")
         L_m2_intro.pack()
         fight_monster()
         # opp_att = random.randint(10, 20)
-
+    quit_screen()
 
 
 
