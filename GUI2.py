@@ -799,7 +799,8 @@ def get_bossmonster():
         L_m2_intro.pack()
         fight_monster()
         # opp_att = random.randint(10, 20)
-    quit_screen()
+    b=Button(frame1, text ="Quit", command =quit_screen)
+    b.pack()
 
 
 
