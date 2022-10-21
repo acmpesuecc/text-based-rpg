@@ -539,17 +539,22 @@ def monster_potion_1():
     global frame_monster_potion_1
     frame_monster_potion_1 = Frame(root)
     frame_monster_potion_1.pack()
-    L_monster_potion_info = Label(frame_monster_potion_1, text="We have two types of potions."
+    L_monster_potion_info = Label(frame_monster_potion_1, text="We have three types of potions."
                                                               "Small potion that increase your HP by 30\n"
                                                               "And..\n"
                                                               "Ultra potion that increase your HP by 50\n"
+                                                              "And..\n"
+                                                              "Medium potion that increases your HP by 40\n"
                                                               f"Your HP is {hp}\n"
                                                               f"You have {ultra_potion} ultra potions"
                                                               f" and {potion} potions\n"
+                                                              f" and {medium_potion} medium potions\n"
                                                               "Which potion would you like to drink?\n")
     L_monster_potion_info.pack()
     B_monster_potion_small = Button(frame_monster_potion_1, text="Small Potion", command=lambda: monster_potion_1_small())
     B_monster_potion_ultra = Button(frame_monster_potion_1, text="Ultra Potion", command=lambda: monster_potion_1_ultra())
+    B_monster_potion_medium = Button(frame_monster_potion_1, text="Medium Potion", command=lambda: monster_potion_1_medium())
+    B_monster_potion_medium.pack()
     B_monster_potion_small.pack()
     B_monster_potion_ultra.pack()
     B_monster_potion_back = Button(frame_monster_potion_1, text="back to battle", command=lambda: monster_potion_to_attack())
@@ -588,6 +593,21 @@ def monster_potion_1_ultra():
         L_monster_potion_1_ultra = Label(frame_monster_potion_1, text=f"You HP is now {hp}\n"
                                                                       f"You have {ultra_potion} ultra potions remaining")
         L_monster_potion_1_ultra.pack()
+
+def monster_potion_1_medium():
+    global medium_potion
+    global hp
+    if medium_potion == 0:
+        L_monster_potion_1_medium = Label(frame_monster_potion_1, text="You have no medium potions")
+        L_monster_potion_1_medium.pack()
+    else:
+        medium_potion = medium_potion - 1
+        hp = hp + 40
+        if hp > 100:
+            hp = 100
+        L_monster_potion_1_medium = Label(frame_monster_potion_1, text=f"You HP is now {hp}\n"
+                                                                      f"You have {medium_potion} medium potions remaining")
+        L_monster_potion_1_medium.pack()
 
 def you_died():
     frame_you_died = Frame(root)
@@ -683,17 +703,22 @@ def drink_potion():
     frame_monster_attack_1.destroy()
     frame_monster_potion_1 = Frame(root)
     frame_monster_potion_1.pack()
-    L_monster_potion_info = Label(frame_monster_potion_1, text="We have two types of potions."
+    L_monster_potion_info = Label(frame_monster_potion_1, text="We have three types of potions."
                                                               "Small potion that increase your HP by 30\n"
                                                               "And..\n"
                                                               "Ultra potion that increase your HP by 50\n"
+                                                              "And..\n"
+                                                              "Medium potion that increases your HP by 40\n"
                                                               f"Your HP is {hp}\n"
                                                               f"You have {ultra_potion} ultra potions"
                                                               f" and {potion} potions\n"
+                                                              f" and {medium_potion} medium potions\n"
                                                               "Which potion would you like to drink?\n")
     L_monster_potion_info.pack()
     B_monster_potion_small = Button(frame_monster_potion_1, text="Small Potion", command=lambda: monster_potion_1_small())
     B_monster_potion_ultra = Button(frame_monster_potion_1, text="Ultra Potion", command=lambda: monster_potion_1_ultra())
+    B_monster_potion_medium = Button(frame_monster_potion_1, text="Medium Potion", command=lambda: monster_potion_1_medium())
+    B_monster_potion_medium.pack()
     B_monster_potion_small.pack()
     B_monster_potion_ultra.pack()
     B_next_room = Button(frame_monster_potion_1, text="Next", command=lambda: monster_rest_to_room())
