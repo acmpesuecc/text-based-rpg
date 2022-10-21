@@ -18,6 +18,7 @@ Orichalium_Armour = False  # decreases opp_att by 30
 potion = 1  # increases hp by 30. Cost=300 gold
 ultra_potion = 1  # increases hp by 50. Cost=600 gold
 which_potion = 0  # variable that lets you select the potion that you want to take.
+medium_potion = 1 #incresws hp by 40 and costs 450 gold
 
 def get_room():
     room = ("monster", "shop", "treasure box", "monster", "shop")
@@ -61,9 +62,9 @@ def shop_Potion():
     frame_shop_1.destroy()
     frame_shop_potion = Frame(root)
     frame_shop_potion.pack()
-    L_Shop_Potion_1 = Label(frame_shop_potion, text=f"You currently have {potion} Small potions and {ultra_potion} Ultra potions with you.\n"
-                                                    f"We have 2 types of potion.\n"
-                                                    f"Small Potion and Ultra Potion\n"
+    L_Shop_Potion_1 = Label(frame_shop_potion, text=f"You currently have {potion} Small potions, {medium_potion} medium potions and {ultra_potion} Ultra potions with you.\n"
+                                                    f"We have 3 types of potion.\n"
+                                                    f"Small Potion Ultra Potion and medium potion\n"
                                                     f"Would you like to know more about them?\n")
     L_Shop_Potion_1.pack()
     B_Shop_Potion_Y = Button(frame_shop_potion, text="Yes", command=lambda: shop_potion_yes())
@@ -81,16 +82,20 @@ def shop_potion_no():
                                                         "Which potion would you like to buy?")
     L_Shop_Potion_No.pack()
     B_Shop_Potion_No_SP = Button(frame_shop_potion_no, text="Small Potion", command=lambda: shop_potions_small())
+    B_Shop_Potion_No_MP = Button(frame_shop_potion_no, text="Medium Potion", command=lambda: shop_potions_medium())
     B_Shop_Potion_No_UP = Button(frame_shop_potion_no, text="Ultra Potion", command=lambda: shop_potions_ultra())
     B_Shop_Potion_No_UP.pack()
+    B_Shop_Potion_No_MP.pack()
     B_Shop_Potion_No_SP.pack()
+    
 
 def shop_potion_yes():
     global frame_shop_potion_yes
     frame_shop_potion.destroy()
     frame_shop_potion_yes = Frame(root)
     frame_shop_potion_yes.pack()
-    L_Shop_Potion_Yes = Label(frame_shop_potion_yes, text="Small potion that costs 250 gold will increase your HP by 30\n"
+    L_Shop_Potion_Yes = Label(frame_shop_potion_yes, text="Small potion that costs 250 gold will increase your HP by 30\nMedium potion that costs 450 gold will increase your HP by 40"
+
                                                           "And..\n"
                                                           "Ultra potion that costs 600 gold will increase your HP by 50")
     L_Shop_Potion_Yes.pack()
@@ -135,6 +140,42 @@ def shop_potion_small_buy():
                                                                    f"You now have {potion} Small Potions with you\n"
                                                                    "Let's continue shopping.."))
         L_shop_potion_small.pack()
+
+def shop_potions_medium():
+    global frame_shop_potion_medium
+    frame_shop_potion_no.destroy()
+    frame_shop_potion_medium = Frame(root)
+    frame_shop_potion_medium.pack()
+    L_shop_potion_medium = Label(frame_shop_potion_medium, text="How many mediuim potions would you like to buy?\n"
+                                                              "Cost=450 gold\n"
+                                                              f"You have {gold} gold")
+    L_shop_potion_medium.pack()
+
+    B_shop_potion_medium = Button(frame_shop_potion_medium, text="Buy", command=lambda: shop_potion_medium_buy())
+    B_shop_potion_medium.pack()
+    B_shop_potion_medium_main = Button(frame_shop_potion_medium, text="Back", command=lambda: shop_potions_medium_to_main())
+    B_shop_potion_medium_main.pack(side=BOTTOM)
+    
+def shop_potions_medium_to_main():
+    frame_shop_potion_medium.destroy()
+    shop()
+
+def shop_potion_medium_buy():
+    global gold
+    global medium_potion
+    if gold - 450 < 0:
+        L_shop_potion_medium = Label(frame_shop_potion_small, text="You don't have enough gold.\n"
+                                                                  "Let's shop for something else..\n")
+        L_shop_potion_medium.pack()
+        # If user has enough gold
+    else:
+        medium_potion = medium_potion + 1
+        gold = gold - 450
+        L_shop_potion_medium = Label(frame_shop_potion_medium, text=(f"You now have {gold} gold with you\n"
+                                                                   f"You now have {medium_potion} Medium Potions with you\n"
+                                                                   "Let's continue shopping.."))
+        L_shop_potion_medium.pack()
+
 
 def shop_potions_ultra():
     global frame_shop_potion_ultra
@@ -464,6 +505,7 @@ def shop():
     global potion
     global ultra_potion
     global frame_shop_1
+    global medium_potion
     frame_shop_1 = Frame(root)
     frame_shop_1.pack()
     L_Shop_Wel=Label(frame_shop_1, text="Welcome to the store..\nWhat would you like to buy?\n")
@@ -494,18 +536,21 @@ def monster_potion_1():
     global frame_monster_potion_1
     frame_monster_potion_1 = Frame(root)
     frame_monster_potion_1.pack()
-    L_monster_potion_info = Label(frame_monster_potion_1, text="We have two types of potions."
-                                                              "Small potion that increase your HP by 30\n"
+    L_monster_potion_info = Label(frame_monster_potion_1, text="We have three types of potions."
+                                                              "Small potion that increase your HP by 30\nMedium potion that increase your HP by 40"
                                                               "And..\n"
                                                               "Ultra potion that increase your HP by 50\n"
                                                               f"Your HP is {hp}\n"
                                                               f"You have {ultra_potion} ultra potions"
+                                                              f"You have {medium_potion} medium potions"
                                                               f" and {potion} potions\n"
                                                               "Which potion would you like to drink?\n")
     L_monster_potion_info.pack()
     B_monster_potion_small = Button(frame_monster_potion_1, text="Small Potion", command=lambda: monster_potion_1_small())
+    B_monster_potion_medium = Button(frame_monster_potion_1, text="Medium Potion", command=lambda: monster_potion_1_medium())
     B_monster_potion_ultra = Button(frame_monster_potion_1, text="Ultra Potion", command=lambda: monster_potion_1_ultra())
     B_monster_potion_small.pack()
+    B_monster_potion_medium.pack()
     B_monster_potion_ultra.pack()
     B_monster_potion_back = Button(frame_monster_potion_1, text="back to battle", command=lambda: monster_potion_to_attack())
     B_monster_potion_back.pack()
@@ -528,6 +573,21 @@ def monster_potion_1_small():
         L_monster_potion_1_small = Label(frame_monster_potion_1, text=f"You HP is now {hp}\n"
                                                                       f"You have {potion} small potions remaining")
         L_monster_potion_1_small.pack()
+
+def monster_potion_1_medium():
+    global medium_potion
+    global hp
+    if medium_potion == 0:
+        L_monster_potion_1_medium = Label(frame_monster_potion_1, text="You have no medoium potions")
+        L_monster_potion_1_medium.pack()
+    else:
+        medium_potion = medium_potion - 1
+        hp = hp + 40
+        if hp > 100:
+            hp = 100
+        L_monster_potion_1_medium = Label(frame_monster_potion_1, text=f"You HP is now {hp}\n"
+                                                                      f"You have {medium_potion} medium potions remaining")
+        L_monster_potion_1_medium.pack()
 
 def monster_potion_1_ultra():
     global ultra_potion
@@ -638,18 +698,22 @@ def drink_potion():
     frame_monster_attack_1.destroy()
     frame_monster_potion_1 = Frame(root)
     frame_monster_potion_1.pack()
-    L_monster_potion_info = Label(frame_monster_potion_1, text="We have two types of potions."
-                                                              "Small potion that increase your HP by 30\n"
+    L_monster_potion_info = Label(frame_monster_potion_1, text="We have three types of potions."
+                                                              "Small potion that increase your HP by 30\nMedium potion that increase your HP by 40"
                                                               "And..\n"
                                                               "Ultra potion that increase your HP by 50\n"
                                                               f"Your HP is {hp}\n"
                                                               f"You have {ultra_potion} ultra potions"
-                                                              f" and {potion} potions\n"
+                                                              f"You have {medium_potion} medium potions"
+                                                              f" and {potion} small potions\n"
                                                               "Which potion would you like to drink?\n")
     L_monster_potion_info.pack()
     B_monster_potion_small = Button(frame_monster_potion_1, text="Small Potion", command=lambda: monster_potion_1_small())
+    B_monster_potion_medium = Button(frame_monster_potion_1, text="Medium Potion", command=lambda: monster_potion_1_medium())
     B_monster_potion_ultra = Button(frame_monster_potion_1, text="Ultra Potion", command=lambda: monster_potion_1_ultra())
+    
     B_monster_potion_small.pack()
+    B_monster_potion_medium.pack()
     B_monster_potion_ultra.pack()
     B_next_room = Button(frame_monster_potion_1, text="Next", command=lambda: monster_rest_to_room())
     B_next_room.pack()
@@ -759,7 +823,6 @@ root = Tk()
 root.title("The Quest")
 frame1 = Frame(root,padx=50, pady=50)
 frame1.pack(padx=50, pady=50)
-
 root.geometry("500x500")
 label = Label(frame1, text="Welcome to The Quest!!\nStory...\nIntro")
 label.pack()
