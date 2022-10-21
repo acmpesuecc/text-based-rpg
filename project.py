@@ -27,6 +27,8 @@ Orichalium_Sword = False  # increases attack by 40
 Iron_Armour = False  # decreases opp_att by 10
 Mythril_Armour = False  # decreases opp_att by 20
 Orichalium_Armour = False  # decereases opp_att by 30
+platinum_armour = False #decreases opp_att by 40
+diamond_armour = False  #decraese opp_att by 45
 potion = 1  # increases hp by 30. Cost=300 gold
 ultra_potion = 1  # increases hp by 50. Cost=600 gold
 which_potion = 0  # variable that lets you select the potion that you want to take.
@@ -205,6 +207,8 @@ def shopping():
     global Iron_Armour
     global Mythril_Armour
     global Orichalium_Armour
+    global diamond_armour
+    global platinum_armour
     global potion
     global ultra_potion
     print("")
@@ -403,14 +407,19 @@ def shopping():
     # If user wants to buy armors
     if int(store1) == 3:
         # Checking what Armor does the user currently has..
-        if armor1 == True and armor2 == False and armor3 == False:
+        if armor1 == True and armor2 == False and armor3 == False and armor4 == False  and armor5 == False:
             typing("Right now, you have Armor1")
-        elif armor1 == False and armor2 == True and armor3 == False:
+        elif armor1 == False and armor2 == True and armor3 == False and armor4 == False  and armor5 == False:
             typing("Right now you have Armor2")
-        elif armor1 == False and armor2 == False and armor3 == True:
+        elif armor1 == False and armor2 == False and armor3 == True and armor4 == False  and armor5 == False:
             typing("Right now you have Armor3")
-        typing("We have 3 types of armors..")
-        typing("Armor1, Armor2, Armor3")
+        elif armor1 == False and armor2 == False and armor3 == False and armor4 == True  and armor5 == False:
+            typing("Right now you have Armor4")
+        elif armor1 == False and armor2 == False and armor3 == False and armor4 == False  and armor5 == True:
+            typing("Right now you have Armor5")
+        
+        typing("We have 5 types of armors..")
+        typing("Armor1, Armor2, Armor3,Armor4 ,Armor5")
         typing("Would you like to know more about them?")
         x = input("1=Yes or 2=No")
 
@@ -426,21 +435,24 @@ def shopping():
         # If user wants to know about armors
         if int(x) == 1:
             typing("Armor1 costs 100 gold and increases your defense by 10\n")
-            typing("Sword2 costs 200 gold and increases your defense by 20\n")
-            typing("Sword3 costs 300 gold and increases your defense by 30\n")
+            typing("Armor2 costs 200 gold and increases your defense by 20\n")
+            typing("Armor3 costs 300 gold and increases your defense by 30\n")
+            typing("Armor4 costs 400 gold and increases your defense by 40\n")
+            typing("Armor4 costs 600 gold and increases your defense by 45\n")
+
         # if user doesn't want to know about armors
         elif int(x) == 2:
             typing("Okay then..")
 
         # asking user about which armor that they wants to buy
         typing("Which armor would you like to buy?\n")
-        shop_armor = input("1=Armor1, 2=Armor2, 3=Armor3")
+        shop_armor = input("1=Armor1, 2=Armor2, 3=Armor3, 4=Armor4, 5=Armor5")
 
         # checking for incorrect inputs for shop_armor
-        while int(shop_armor) != 1 and int(shop_armor) != 2 and int(shop_armor) != 3:
+        while int(shop_armor) != 1 and int(shop_armor) != 2 and int(shop_armor) != 3 and int(shop_armor) != 4 and int(shop_armor) != 5 :
             typing("Invalid Input. Try again")
-            shop_armor = input("1=Armor1, 2=Armor2, 3=Armor3")
-            if shop_armor == 1 or shop_armor == 2 or shop_armor == 3:
+            shop_armor = input("1=Armor1, 2=Armor2, 3=Armor3, 4=Armor4,5=Armor5")
+            if shop_armor == 1 or shop_armor == 2 or shop_armor == 3 or shop_armor == 4 or shop_armor == 5:
                 break
             else:
                 pass
@@ -459,6 +471,8 @@ def shopping():
                 armor1 = True
                 armor2 = False
                 armor3 = False
+                armor4 = False
+                armor5 = False
                 gold = gold - 100
                 typing("You now have Armor1")
                 print(f"You are left with {gold} gold left")
@@ -479,6 +493,8 @@ def shopping():
                 armor1 = False
                 armor2 = True
                 armor3 = False
+                armor4 = False
+                armor5 = False
                 gold = gold - 200
                 typing("You now have Armor2.")
                 print(f"You are left with {gold} gold.")
@@ -499,8 +515,52 @@ def shopping():
                 armor1 = False
                 armor2 = False
                 armor3 = True
+                armor4 = False
+                armor5 = False
                 gold = gold - 300
                 typing("You now have Armor3")
+                print(f"You are left with {gold} gold.")
+                typing("Let's continue shopping..")
+                shopping()
+
+        elif int(shop_armor) == 4:
+            # If user already has sword4
+            if armor4 == True:
+                typing("You are already carrying Armor4")
+            # If user doesn't have enough gold for sword3
+            elif gold < 400:
+                typing("You don't have enough gold.")
+                print(f"You own {gold} gold.")
+            # Purchasing armor3 and completing the transaction
+            elif armor4 == False:
+                armor1 = False
+                armor2 = False
+                armor3 = False
+                armor4 = True
+                armor5 = False
+                gold = gold - 400
+                typing("You now have Armor4")
+                print(f"You are left with {gold} gold.")
+                typing("Let's continue shopping..")
+                shopping()
+
+        elif int(shop_armor) == 5:
+            # If user already has sword5
+            if armor5 == True:
+                typing("You are already carrying Armor3")
+            # If user doesn't have enough gold for sword3
+            elif gold < 600:
+                typing("You don't have enough gold.")
+                print(f"You own {gold} gold.")
+            # Purchasing armor3 and completing the transaction
+            elif armor5 == False:
+                armor1 = False
+                armor2 = False
+                armor3 = False
+                armor4 = False
+                armor5 = True
+                gold = gold - 600
+                typing("You now have Armor5")
                 print(f"You are left with {gold} gold.")
                 typing("Let's continue shopping..")
                 shopping()
@@ -593,7 +653,7 @@ while n != 8:
             opp_att = random.randint(60, 70)
             fight()
             potion_time()
-            
+
         n = n + 1
 
     # if user gets a treasure box
