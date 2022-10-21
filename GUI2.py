@@ -759,8 +759,8 @@ def get_monster():
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf")
-
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","golum","rhegar")
+    
     monster = random.choice(monsters)
     # print(monster)
     opp_hp = 100
@@ -773,6 +773,26 @@ def get_monster():
         L_m1_intro.pack()
         fight_monster()
         # opp_att = random.randint(0, 10)
+    
+    if monster == "golum":
+        m = 12
+        # monster 12
+        # Attack in range of 10-20
+        L_m2_intro = Label(frame_monster_1, text="You have to face Golum\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m2_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(10, 20)
+
+    if monster == "rhegar":
+        m = 11
+        # monster 11
+        # Attack in range of 10-20
+        L_m2_intro = Label(frame_monster_1, text="You have to face Rhegar\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m2_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(10, 20)
 
     if monster == "Werewolf":
         m = 2
