@@ -20,20 +20,28 @@ ultra_potion = 1  # increases hp by 50. Cost=600 gold
 medium_potion=1 #increases hp by 40, cost=450 gold
 which_potion = 0  # variable that lets you select the potion that you want to take.
 
-def get_room():
-    room = ("monster", "shop", "treasure box", "monster", "shop")
-    inside_room = random.choice(room)
-    # print(inside_room)
-    if inside_room == "shop":
-        frame1.destroy()
-        shop()
-    elif inside_room == "treasure box":
-        frame1.destroy()
-        treasure_box()
-    elif inside_room == "monster":
-        frame1.destroy()
-        get_monster()
 
+def get_room():
+    rav = 0
+    if (rav%20!= 0):  # a loop to make sure that the bossmonster doesnt appear until upto 20 iterations in the game
+        rav += 1
+        room = ("monster", "shop", "treasure box", "monster", "shop")
+        inside_room = random.choice(room)
+        # print(inside_room)
+        if inside_room == "shop":
+            frame1.destroy()
+            shop()
+        elif inside_room == "treasure box":
+            frame1.destroy()
+            treasure_box()
+        elif inside_room == "monster":
+            frame1.destroy()
+            get_monster()
+
+    else:
+        rav += 1
+        frame1.destroy()
+        get_bossmonster()
 
 # treasure box room
 def treasure_box():
@@ -759,8 +767,8 @@ def get_monster():
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","golum","rhegar")
-    
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper""golum","rhegar")
+
     monster = random.choice(monsters)
     # print(monster)
     opp_hp = 100
@@ -775,8 +783,8 @@ def get_monster():
         # opp_att = random.randint(0, 10)
     
     if monster == "golum":
-        m = 12
-        # monster 12
+        m = 13
+        # monster 13
         # Attack in range of 10-20
         L_m2_intro = Label(frame_monster_1, text="You have to face Golum\n"
                                                  "The match starts. You get the first chance\n")
@@ -785,8 +793,8 @@ def get_monster():
         # opp_att = random.randint(10, 20)
 
     if monster == "rhegar":
-        m = 11
-        # monster 11
+        m = 14
+        # monster 14
         # Attack in range of 10-20
         L_m2_intro = Label(frame_monster_1, text="You have to face Rhegar\n"
                                                  "The match starts. You get the first chance\n")
@@ -887,8 +895,8 @@ def get_monster():
         fight_monster()
         # opp_att = random.randint(70, 80)
     if monster == "severus":
-        m = 9
-        # monster 9
+        m = 11
+        # monster 11
         # Attack in range of 80-90
         L_m1_intro = Label(frame_monster_1, text="You have to face severus\n"
                                                  "The match starts. You get the first chance\n")
@@ -896,14 +904,74 @@ def get_monster():
         fight_monster()
         # opp_att = random.randint(80,90)
     if monster == "snape":
-        m = 10
-        # monster 10
+        m = 12
+        # monster 12
         # Attack in range of 90-100
         L_m1_intro = Label(frame_monster_1, text="You have to face snape\n"
                                                  "The match starts. You get the first chance\n")
         L_m1_intro.pack()
         fight_monster()
         # opp_att = random.randint(90,100)
+
+
+    if monster == "Siri":
+        m = 13
+        # monster 13
+        # Attack in range of 70-80
+        L_m9_intro = Label(frame_monster_1, text="You have to face Siri\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m9_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)  
+    if monster == "GrimReaper":
+        m = 14
+        # monster 14
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face Dave\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
+
+def quit_screen():
+    quit_scr= Label(frame_monster_1, text="Game over")
+    quit_scr.pack()
+
+
+def get_bossmonster():
+    global m
+    global opp_hp
+    global monster
+    global frame_monster_1
+    frame_monster_1 = Frame(root)
+    frame_monster_1.pack()
+    L_monster_Wel = Label(frame_monster_1, text="You have to fight a boss monster.")
+    L_monster_Wel.pack()
+    bossmonsters = ("Demon Slayer","Big Tooth")
+    monster = random.choice(bossmonsters)
+    # print(monster)
+    opp_hp = 100
+    if monster == "Demon Slayer":
+        m = 1
+        # monster 1
+        # Attack in range of 0-10
+        L_m1_intro = Label(frame_monster_1, text="You have to face Demon Slayer\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m1_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(0, 10)
+
+    if monster == "Big Tooth":
+        m = 2
+        # monster 2
+        # Attack in range of 10-20
+        L_m2_intro = Label(frame_monster_1, text="You have to face Big Tooth\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m2_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(10, 20)
+    b=Button(frame1, text ="Quit", command =quit_screen)
+    b.pack()
 
 
 
