@@ -553,7 +553,7 @@ def shopping():
 
 
 n = 0
-while n != 8:
+while n != 10:
     inside_room = random.choice(room)
 
     # if user has to face a monster
@@ -562,7 +562,8 @@ while n != 8:
     elif inside_room == "monster":
         typing("You have to face a monster...\n")
 
-        monsters = ("m1", "m2", "m3", "m4", "m5", "m6","m7","m8","m9","m10")
+        monsters = ("m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8","m9","m10","m11","m12")
+
         monster = random.choice(monsters)
 
         if monster == "m1":
@@ -637,8 +638,9 @@ while n != 8:
             opp_att = random.randint(60, 70)
             fight()
             potion_time()
-            
-
+           
+        if monster == "m9":
+            m = 9
             # monster 9
             # Attack in range of 60-70
             typing("You have to face monster 9\n")
@@ -652,6 +654,22 @@ while n != 8:
             # Attack in range of 70-80
             typing("You have to face monster 10\n")
             opp_att = random.randint(70, 80)
+            fight()
+            potion_time()
+        if monster == "m11":
+            m = 11
+            # monster 11
+            # Attack in range of 80-90
+            typing("You have to face monster 11\n")
+            opp_att = random.randint(80, 90)
+            fight()
+            potion_time()
+        if monster == "m12":
+            m = 12
+            # monster 12
+            # Attack in range of 90-100
+            typing("You have to face monster 12\n")
+            opp_att = random.randint(90, 100)
             fight()
             potion_time()
 
