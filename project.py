@@ -511,7 +511,7 @@ def shopping():
 
 
 n = 0
-while n != 6:
+while n != 8:
     inside_room = random.choice(room)
 
     # if user has to face a monster
@@ -519,7 +519,7 @@ while n != 6:
         break
     elif inside_room == "monster":
         typing("You have to face a monster...\n")
-        monsters = ("m1", "m2", "m3", "m4", "m5", "m6")
+        monsters = ("m1", "m2", "m3", "m4", "m5", "m6","m7","m8")
         monster = random.choice(monsters)
 
         if monster == "m1":
@@ -576,6 +576,24 @@ while n != 6:
             fight()
             potion_time()
 
+        if monster == "m7":
+            m = 7
+            # monster 6
+            # Attack in range of 30-40
+            typing("You have to face monster 7\n")
+            opp_att = random.randint(30, 40)
+            fight()
+            potion_time()
+        
+        if monster == "m8":
+            m = 8
+            # monster 8
+            # Attack in range of 60-70
+            typing("You have to face monster 8\n")
+            opp_att = random.randint(60, 70)
+            fight()
+            potion_time()
+            
         n = n + 1
 
     # if user gets a treasure box

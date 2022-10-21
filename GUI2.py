@@ -688,7 +688,7 @@ def get_monster():
     frame_monster_1.pack()
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon")
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon","orc","dark elf")
     monster = random.choice(monsters)
     # print(monster)
     opp_hp = 100
@@ -752,8 +752,26 @@ def get_monster():
         L_m6_intro.pack()
         fight_monster()
         # opp_att = random.randint(50, 60)
+    
+    if monster == "orc":
+        m = 7
+        # monster 7
+        # Attack in range of 30-40
+        L_m7_intro = Label(frame_monster_1, text="You have to face orc\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m7_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(30, 40)
 
-
+    if monster == "darkelf":
+        m = 8
+        # monster 8
+        # Attack in range of 60-70
+        L_m8_intro = Label(frame_monster_1, text="You have to face Dark Elf\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m8_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(60, 70)
 
 root = Tk()
 root.title("The Quest")
