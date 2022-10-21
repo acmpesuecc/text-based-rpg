@@ -1,4 +1,3 @@
-from lib2to3.refactor import MultiprocessingUnsupported
 from tkinter import *
 import sys
 import time
