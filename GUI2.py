@@ -20,7 +20,7 @@ ultra_potion = 1  # increases hp by 50. Cost=600 gold
 which_potion = 0  # variable that lets you select the potion that you want to take.
 
 def get_room():
-    room = ("monster", "shop", "treasure box", "monster", "shop")
+    room = ("monster", "shop", "treasure box", "bossmonster", "shop")
     inside_room = random.choice(room)
     # print(inside_room)
     if inside_room == "shop":
@@ -32,6 +32,10 @@ def get_room():
     elif inside_room == "monster":
         frame1.destroy()
         get_monster()
+
+    elif inside_room == "bossmonster":
+        frame1.destroy()
+        get_bossmonster()
 
 
 # treasure box room
@@ -752,6 +756,41 @@ def get_monster():
         L_m6_intro.pack()
         fight_monster()
         # opp_att = random.randint(50, 60)
+
+
+def get_bossmonster():
+    global m
+    global opp_hp
+    global monster
+    global frame_monster_1
+    frame_monster_1 = Frame(root)
+    frame_monster_1.pack()
+    L_monster_Wel = Label(frame_monster_1, text="You have to fight a boss monster.")
+    L_monster_Wel.pack()
+    monsters = ("Demon Slayer","Big Tooth")
+    monster = random.choice(monsters)
+    # print(monster)
+    opp_hp = 100
+    if monster == "Demon Slayer":
+        m = 1
+        # monster 1
+        # Attack in range of 0-10
+        L_m1_intro = Label(frame_monster_1, text="You have to face Goblin\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m1_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(0, 10)
+
+    if monster == "Big Tooth":
+        m = 2
+        # monster 2
+        # Attack in range of 10-20
+        L_m2_intro = Label(frame_monster_1, text="You have to face Werewolf\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m2_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(10, 20)
+
 
 
 
