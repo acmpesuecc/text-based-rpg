@@ -1,3 +1,5 @@
+#added monsters and armour onto the gui
+
 from tkinter import *
 import sys
 import time
