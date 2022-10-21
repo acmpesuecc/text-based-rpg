@@ -15,6 +15,8 @@ Orichalium_Sword = False  # increases attack by 40
 Iron_Armour = False  # decreases opp_att by 10
 Mythril_Armour = False  # decreases opp_att by 20
 Orichalium_Armour = False  # decreases opp_att by 30
+Jade_Armour = False # increases hp by 10
+Diamond_Armour = False #increases hp by 20
 potion = 1  # increases hp by 30. Cost=300 gold
 ultra_potion = 1  # increases hp by 50. Cost=600 gold
 medium_potion=1 #increases hp by 40, cost=450 gold
@@ -375,8 +377,14 @@ def shop_armor():
     elif Orichalium_Armour:
         L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Orichalium_Armour")
         L_Shop_armor_owned.pack()
-    L_Shop_armor_intro = Label(frame_shop_armor, text="We have 3 types of armors..\n"
-                                                      "Iron_Armour, Mythril_Armour and Orichalium_Armour\n"
+    elif Jade_Armour:
+        L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Jade_Armour")
+        L_Shop_armor_owned.pack()
+    elif Diamond_Armour:
+        L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Diamond_Armour")
+        L_Shop_armor_owned.pack()    
+    L_Shop_armor_intro = Label(frame_shop_armor, text="We have 5 types of armors..\n"
+                                                      "Iron_Armour, Mythril_Armour,Orichalium_Armour, Jade_Armour and Diamond_Armour\n"
                                                       "Would you like to know more about them?\n")
     L_Shop_armor_intro.pack()
     B_Shop_armor_Y = Button(frame_shop_armor, text="Yes", command=lambda: shop_armor_yes())
@@ -391,7 +399,9 @@ def shop_armor_yes():
     frame_shop_armor_yes.pack()
     L_Shop_armor_Y_info = Label(frame_shop_armor_yes, text="Iron_Armour costs 200 gold and increases your attack by 20\n"
                                                             "Mythril_Armour costs 300 gold and increases your attack by 30\n"
-                                                            "Orichalium_Armour costs 400 gold and increases your attack by 40\n")
+                                                            "Orichalium_Armour costs 400 gold and increases your attack by 40\n"
+                                                            "Jade_Armour costs 250 gold and increases your hp by 10\n"
+                                                            "Diamond_Armour costs 350 gold and increases your hp by 20\n")
     L_Shop_armor_Y_info.pack()
 
     B_Shop_armor_Yes = Button(frame_shop_armor_yes, text="Next", command=lambda: shop_armor_yestono())
@@ -414,6 +424,10 @@ def shop_armor_no():
     B_Shop_armors_armor2.pack()
     B_Shop_armors_armor3 = Button(frame_shop_armors_no, text="Orichalium_Armour", command=lambda: shop_armor_armor3())
     B_Shop_armors_armor3.pack()
+    B_Shop_armors_armor4 = Button(frame_shop_armors_no, text="Jade_Armour", command=lambda: shop_armor_armor4())
+    B_Shop_armors_armor4.pack()
+    B_Shop_armors_armor5 = Button(frame_shop_armors_no, text="Diamond_Armour", command=lambda: shop_armor_armor5())
+    B_Shop_armors_armor5.pack()    
     B_Shop_armors_back = Button(frame_shop_armors_no, text="back", command=lambda: shop_armor_to_main())
     B_Shop_armors_back.pack(side=BOTTOM)
 
@@ -422,6 +436,8 @@ def shop_armor_armor1():
     global Mythril_Armour
     global Orichalium_Armour
     global gold
+    global Jade_Armour
+    global Diamond_Armour
     if Iron_Armour == False:
         if gold > 200:
             gold = gold - 200
@@ -431,6 +447,8 @@ def shop_armor_armor1():
             Iron_Armour = True
             Mythril_Armour = False
             Orichalium_Armour = False
+            Jade_Armour = False
+            Diamond_Armour = False
 
         else:
             L_shop_armors_armor1 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -445,6 +463,8 @@ def shop_armor_armor2():
     global Mythril_Armour
     global Orichalium_Armour
     global gold
+    global Jade_Armour
+    global Diamond_Armour
     if Mythril_Armour == False:
         if gold > 300:
             gold = gold - 300
@@ -454,6 +474,8 @@ def shop_armor_armor2():
             Iron_Armour = False
             Mythril_Armour = True
             Orichalium_Armour = False
+            Jade_Armour = False
+            Diamond_Armour = False
 
         else:
             L_shop_armors_armor2 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -468,6 +490,8 @@ def shop_armor_armor3():
     global Mythril_Armour
     global Orichalium_Armour
     global gold
+    global Jade_Armour
+    global Diamond_Armour
     if Orichalium_Armour == False:
         if gold > 400:
             gold = gold - 400
@@ -477,6 +501,8 @@ def shop_armor_armor3():
             Iron_Armour = False
             Mythril_Armour = False
             Orichalium_Armour = True
+            Jade_Armour = False
+            Diamond_Armour = False
 
         else:
             L_shop_armors_armor3 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -485,6 +511,60 @@ def shop_armor_armor3():
     else:
         L_shop_armors_armor3 = Label(frame_shop_armors_no, text="You already have Orichalium_Armour")
         L_shop_armors_armor3.pack()
+
+def shop_armor_armor4():
+    global Iron_Armour
+    global Mythril_Armour
+    global Orichalium_Armour
+    global gold
+    global Jade_Armour
+    global Diamond_Armour
+    if Jade_Armour == False:
+        if gold > 250:
+            gold = gold - 250
+            L_shop_armors_armor4 = Label(frame_shop_armors_no, text="You now have Jade_Armour\n"
+                                                                    f"You now have {gold} gold")
+            L_shop_armors_armor4.pack()
+            Iron_Armour = False
+            Mythril_Armour = False
+            Orichalium_Armour = False
+            Jade_Armour = True
+            Diamond_Armour = False
+
+        else:
+            L_shop_armors_armor4 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
+                                                                    f"You have {gold} gold")
+            L_shop_armors_armor4.pack()
+    else:
+        L_shop_armors_armor4 = Label(frame_shop_armors_no, text="You already have Jade_Armour")
+        L_shop_armors_armor4.pack()
+
+def shop_armor_armor5():
+    global Iron_Armour
+    global Mythril_Armour
+    global Orichalium_Armour
+    global gold
+    global Jade_Armour
+    global Diamond_Armour
+    if Diamond_Armour == False:
+        if gold > 350:
+            gold = gold - 350
+            L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You now have Diamond_Armour\n"
+                                                                    f"You now have {gold} gold")
+            L_shop_armors_armor5.pack()
+            Iron_Armour = False
+            Mythril_Armour = False
+            Orichalium_Armour = False
+            Jade_Armour = False
+            Diamond_Armour = True
+
+        else:
+            L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
+                                                                    f"You have {gold} gold")
+            L_shop_armors_armor5.pack()
+    else:
+        L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You already have Diamond_Armour")
+        L_shop_armors_armor5.pack()
 
 def shop_armor_to_main():
     frame_shop_armors_no.destroy()
@@ -635,6 +715,11 @@ def monster_counterattack_1():
         hp = hp + 20
     elif Orichalium_Armour == True:
         hp = hp + 30
+    elif Jade_Armour == True:
+        hp = hp+10
+    elif Diamond_Armour == True:
+        hp = hp+20
+
     if hp < 0:
         hp = 0
         L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
