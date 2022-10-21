@@ -15,8 +15,11 @@ Orichalium_Sword = False  # increases attack by 40
 Iron_Armour = False  # decreases opp_att by 10
 Mythril_Armour = False  # decreases opp_att by 20
 Orichalium_Armour = False  # decreases opp_att by 30
+Chainmail_Armour = False #decreases opp_att by 40
+Turquoise_Armour = False #decreases opp_att by 50
 potion = 1  # increases hp by 30. Cost=300 gold
 ultra_potion = 1  # increases hp by 50. Cost=600 gold
+medium_potion=1 #increases hp by 40, cost=450 gold
 which_potion = 0  # variable that lets you select the potion that you want to take.
 
 def get_room():
@@ -62,8 +65,8 @@ def shop_Potion():
     frame_shop_potion = Frame(root)
     frame_shop_potion.pack()
     L_Shop_Potion_1 = Label(frame_shop_potion, text=f"You currently have {potion} Small potions and {ultra_potion} Ultra potions with you.\n"
-                                                    f"We have 2 types of potion.\n"
-                                                    f"Small Potion and Ultra Potion\n"
+                                                    f"We have 3 types of potion.\n"
+                                                    f"Small Potion, Ultra Potion and Medium potion\n"
                                                     f"Would you like to know more about them?\n")
     L_Shop_Potion_1.pack()
     B_Shop_Potion_Y = Button(frame_shop_potion, text="Yes", command=lambda: shop_potion_yes())
@@ -82,8 +85,10 @@ def shop_potion_no():
     L_Shop_Potion_No.pack()
     B_Shop_Potion_No_SP = Button(frame_shop_potion_no, text="Small Potion", command=lambda: shop_potions_small())
     B_Shop_Potion_No_UP = Button(frame_shop_potion_no, text="Ultra Potion", command=lambda: shop_potions_ultra())
+    B_Shop_Potion_No_MP = Button(frame_shop_potion_no, text="Medium Potion", command=lambda: shop_potions_medium())
     B_Shop_Potion_No_UP.pack()
     B_Shop_Potion_No_SP.pack()
+    B_Shop_Potion_No_MP.pack()
 
 def shop_potion_yes():
     global frame_shop_potion_yes
@@ -92,7 +97,9 @@ def shop_potion_yes():
     frame_shop_potion_yes.pack()
     L_Shop_Potion_Yes = Label(frame_shop_potion_yes, text="Small potion that costs 250 gold will increase your HP by 30\n"
                                                           "And..\n"
-                                                          "Ultra potion that costs 600 gold will increase your HP by 50")
+                                                          "Ultra potion that costs 600 gold will increase your HP by 50\n"
+                                                          "And..\n"
+                                                          "Medium potion that costs 450 gold will increase your HP by 40")
     L_Shop_Potion_Yes.pack()
     B_Shop_Potion_Yes = Button(frame_shop_potion_yes, text="Next", command=lambda: shop_potion_yestono())
     B_Shop_Potion_Yes.pack()
@@ -178,7 +185,47 @@ def shop_potion_ultra_buy():
                                                                    "Let's continue shopping.."))
         L_shop_potion_ultra.pack()
 
+def shop_potions_medium():
+    global frame_shop_potion_medium
+    frame_shop_potion_no.destroy()
+    frame_shop_potion_medium = Frame(root)
+    frame_shop_potion_medium.pack()
+    L_shop_potion_medium = Label(frame_shop_potion_medium, text="How many Medium potions would you like to buy?\n"
+                                                              "Cost=450 gold\n"
+                                                              f"You have {gold} gold")
+    L_shop_potion_medium.pack()
+    B_shop_potion_medium = Button(frame_shop_potion_medium, text="Buy", command=lambda: shop_potion_medium_buy())
+    B_shop_potion_medium.pack()
+    B_shop_potion_medium_main = Button(frame_shop_potion_medium, text="Back", command=lambda: shop_potions_medium_to_main())
+    B_shop_potion_medium_main.pack(side=BOTTOM)
 
+def shop_potions_medium_to_main():
+    frame_shop_potion_medium.destroy()
+    shop()
+
+def shop_potion_medium_buy():
+    global gold
+    global medium_potion
+    # global frame_shop_potion_ultra_buy
+    # frame_shop_potion_ultra_buy.destroy()
+    # frame_shop_potion_ultra_buy = Frame(root)
+    # frame_shop_potion_ultra_buy.pack()
+    if gold - 450 < 0:
+        L_shop_potion_medium = Label(frame_shop_potion_medium, text="You don't have enough gold.\n"
+                                                                  f"You have {gold} gold with you\n"
+                                                                   f"You have {medium_potion} Medium Potions with you\n"
+                                                                   "Let's shop for something else..\n")
+        L_shop_potion_medium.pack()
+        # B_shop_potion_ultra_main = Button(frame_shop_potion_ultra, text="Back")
+        # B_shop_potion_ultra_main.pack()
+        # If user has enough gold
+    else:
+        medium_potion = medium_potion + 1
+        gold = gold - 450
+        L_shop_potion_medium = Label(frame_shop_potion_medium, text=(f"You now have {gold} gold with you\n"
+                                                                   f"You now have {medium_potion} Medium Potions with you\n"
+                                                                   "Let's continue shopping.."))
+        L_shop_potion_medium.pack()
 
 def shop_sword():
     global frame_shop_sword
@@ -318,6 +365,8 @@ def shop_armor():
     global Iron_Armour
     global Mythril_Armour
     global Orichalium_Armour
+    global Chainmail_Armour
+    global Turquoise_Armour
     frame_shop_1.destroy()
     frame_shop_armor = Frame(root)
     frame_shop_armor.pack()
@@ -330,8 +379,14 @@ def shop_armor():
     elif Orichalium_Armour:
         L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Orichalium_Armour")
         L_Shop_armor_owned.pack()
-    L_Shop_armor_intro = Label(frame_shop_armor, text="We have 3 types of armors..\n"
-                                                      "Iron_Armour, Mythril_Armour and Orichalium_Armour\n"
+    elif Chainmail_Armour:
+        L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Chainmail_Armour")
+        L_Shop_armor_owned.pack()
+    elif Turquoise_Armour:
+        L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Turquoise_Armour")
+        L_Shop_armor_owned.pack()
+    L_Shop_armor_intro = Label(frame_shop_armor, text="We have 5 types of armors..\n"
+                                                      "Iron_Armour, Mythril_Armour, Orichalium_Armour, Chainmail_Armour and Turquoise_Armour\n"
                                                       "Would you like to know more about them?\n")
     L_Shop_armor_intro.pack()
     B_Shop_armor_Y = Button(frame_shop_armor, text="Yes", command=lambda: shop_armor_yes())
@@ -346,7 +401,9 @@ def shop_armor_yes():
     frame_shop_armor_yes.pack()
     L_Shop_armor_Y_info = Label(frame_shop_armor_yes, text="Iron_Armour costs 200 gold and increases your attack by 20\n"
                                                             "Mythril_Armour costs 300 gold and increases your attack by 30\n"
-                                                            "Orichalium_Armour costs 400 gold and increases your attack by 40\n")
+                                                            "Orichalium_Armour costs 400 gold and increases your attack by 40\n"
+                                                            "Chainmail_Armour costs 500 gold and increases your attack by 40\n"
+                                                            "Turquoise_Armour costs 600 gold and increases your attack by 40\n")
     L_Shop_armor_Y_info.pack()
 
     B_Shop_armor_Yes = Button(frame_shop_armor_yes, text="Next", command=lambda: shop_armor_yestono())
@@ -369,6 +426,10 @@ def shop_armor_no():
     B_Shop_armors_armor2.pack()
     B_Shop_armors_armor3 = Button(frame_shop_armors_no, text="Orichalium_Armour", command=lambda: shop_armor_armor3())
     B_Shop_armors_armor3.pack()
+    B_Shop_armors_armor4 = Button(frame_shop_armors_no, text="Chainmail_Armour", command=lambda: shop_armor_armor4())
+    B_Shop_armors_armor4.pack()
+    B_Shop_armors_armor5 = Button(frame_shop_armors_no, text="Turquoise_Armour", command=lambda: shop_armor_armor5())
+    B_Shop_armors_armor5.pack()
     B_Shop_armors_back = Button(frame_shop_armors_no, text="back", command=lambda: shop_armor_to_main())
     B_Shop_armors_back.pack(side=BOTTOM)
 
@@ -376,6 +437,8 @@ def shop_armor_armor1():
     global Iron_Armour
     global Mythril_Armour
     global Orichalium_Armour
+    global Chainmail_Armour
+    global Turquoise_Armour
     global gold
     if Iron_Armour == False:
         if gold > 200:
@@ -386,6 +449,8 @@ def shop_armor_armor1():
             Iron_Armour = True
             Mythril_Armour = False
             Orichalium_Armour = False
+            Chainmail_Armour = False
+            Turquoise_Armour =  False
 
         else:
             L_shop_armors_armor1 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -399,6 +464,8 @@ def shop_armor_armor2():
     global Iron_Armour
     global Mythril_Armour
     global Orichalium_Armour
+    global Chainmail_Armour
+    global Turquoise_Armour
     global gold
     if Mythril_Armour == False:
         if gold > 300:
@@ -409,6 +476,8 @@ def shop_armor_armor2():
             Iron_Armour = False
             Mythril_Armour = True
             Orichalium_Armour = False
+            Chainmail_Armour = False
+            Turquoise_Armour =  False
 
         else:
             L_shop_armors_armor2 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -422,6 +491,8 @@ def shop_armor_armor3():
     global Iron_Armour
     global Mythril_Armour
     global Orichalium_Armour
+    global Chainmail_Armour
+    global Turquoise_Armour
     global gold
     if Orichalium_Armour == False:
         if gold > 400:
@@ -432,6 +503,8 @@ def shop_armor_armor3():
             Iron_Armour = False
             Mythril_Armour = False
             Orichalium_Armour = True
+            Chainmail_Armour = False
+            Turquoise_Armour =  False
 
         else:
             L_shop_armors_armor3 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -440,6 +513,60 @@ def shop_armor_armor3():
     else:
         L_shop_armors_armor3 = Label(frame_shop_armors_no, text="You already have Orichalium_Armour")
         L_shop_armors_armor3.pack()
+
+def shop_armor_armor4():
+    global Iron_Armour
+    global Mythril_Armour
+    global Orichalium_Armour
+    global Chainmail_Armour
+    global Turquoise_Armour
+    global gold
+    if Chainmail_Armour == False:
+        if gold > 500:
+            gold = gold - 500
+            L_shop_armors_armor4 = Label(frame_shop_armors_no, text="You now have Chainmail_Armour\n"
+                                                                    f"You now have {gold} gold")
+            L_shop_armors_armor4.pack()
+            Iron_Armour = False
+            Mythril_Armour = False
+            Orichalium_Armour = False
+            Chainmail_Armour = True
+            Turquoise_Armour =  False
+
+        else:
+            L_shop_armors_armor4 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
+                                                                    f"You have {gold} gold")
+            L_shop_armors_armor4.pack()
+    else:
+        L_shop_armors_armor4 = Label(frame_shop_armors_no, text="You already have Chainmail_Armour")
+        L_shop_armors_armor4.pack()
+
+def shop_armor_armor5():
+    global Iron_Armour
+    global Mythril_Armour
+    global Orichalium_Armour
+    global Chainmail_Armour
+    global Turquoise_Armour
+    global gold
+    if Turquoise_Armour == False:
+        if gold > 600:
+            gold = gold - 600
+            L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You now have Turquoise_Armour\n"
+                                                                    f"You now have {gold} gold")
+            L_shop_armors_armor5.pack()
+            Iron_Armour = False
+            Mythril_Armour = False
+            Orichalium_Armour = False
+            Chainmail_Armour = False
+            Turquoise_Armour =  True
+
+        else:
+            L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
+                                                                    f"You have {gold} gold")
+            L_shop_armors_armor5.pack()
+    else:
+        L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You already have Turquiose_Armour")
+        L_shop_armors_armor5.pack()
 
 def shop_armor_to_main():
     frame_shop_armors_no.destroy()
@@ -461,6 +588,8 @@ def shop():
     global Iron_Armour
     global Mythril_Armour
     global Orichalium_Armour
+    global Chainmail_Armour
+    global Turquoise_Armour
     global potion
     global ultra_potion
     global frame_shop_1
@@ -494,17 +623,22 @@ def monster_potion_1():
     global frame_monster_potion_1
     frame_monster_potion_1 = Frame(root)
     frame_monster_potion_1.pack()
-    L_monster_potion_info = Label(frame_monster_potion_1, text="We have two types of potions."
+    L_monster_potion_info = Label(frame_monster_potion_1, text="We have three types of potions."
                                                               "Small potion that increase your HP by 30\n"
                                                               "And..\n"
                                                               "Ultra potion that increase your HP by 50\n"
+                                                              "And..\n"
+                                                              "Medium potion that increases your HP by 40\n"
                                                               f"Your HP is {hp}\n"
                                                               f"You have {ultra_potion} ultra potions"
                                                               f" and {potion} potions\n"
+                                                              f" and {medium_potion} medium potions\n"
                                                               "Which potion would you like to drink?\n")
     L_monster_potion_info.pack()
     B_monster_potion_small = Button(frame_monster_potion_1, text="Small Potion", command=lambda: monster_potion_1_small())
     B_monster_potion_ultra = Button(frame_monster_potion_1, text="Ultra Potion", command=lambda: monster_potion_1_ultra())
+    B_monster_potion_medium = Button(frame_monster_potion_1, text="Medium Potion", command=lambda: monster_potion_1_medium())
+    B_monster_potion_medium.pack()
     B_monster_potion_small.pack()
     B_monster_potion_ultra.pack()
     B_monster_potion_back = Button(frame_monster_potion_1, text="back to battle", command=lambda: monster_potion_to_attack())
@@ -543,6 +677,21 @@ def monster_potion_1_ultra():
         L_monster_potion_1_ultra = Label(frame_monster_potion_1, text=f"You HP is now {hp}\n"
                                                                       f"You have {ultra_potion} ultra potions remaining")
         L_monster_potion_1_ultra.pack()
+
+def monster_potion_1_medium():
+    global medium_potion
+    global hp
+    if medium_potion == 0:
+        L_monster_potion_1_medium = Label(frame_monster_potion_1, text="You have no medium potions")
+        L_monster_potion_1_medium.pack()
+    else:
+        medium_potion = medium_potion - 1
+        hp = hp + 40
+        if hp > 100:
+            hp = 100
+        L_monster_potion_1_medium = Label(frame_monster_potion_1, text=f"You HP is now {hp}\n"
+                                                                      f"You have {medium_potion} medium potions remaining")
+        L_monster_potion_1_medium.pack()
 
 def you_died():
     frame_you_died = Frame(root)
@@ -638,17 +787,22 @@ def drink_potion():
     frame_monster_attack_1.destroy()
     frame_monster_potion_1 = Frame(root)
     frame_monster_potion_1.pack()
-    L_monster_potion_info = Label(frame_monster_potion_1, text="We have two types of potions."
+    L_monster_potion_info = Label(frame_monster_potion_1, text="We have three types of potions."
                                                               "Small potion that increase your HP by 30\n"
                                                               "And..\n"
                                                               "Ultra potion that increase your HP by 50\n"
+                                                              "And..\n"
+                                                              "Medium potion that increases your HP by 40\n"
                                                               f"Your HP is {hp}\n"
                                                               f"You have {ultra_potion} ultra potions"
                                                               f" and {potion} potions\n"
+                                                              f" and {medium_potion} medium potions\n"
                                                               "Which potion would you like to drink?\n")
     L_monster_potion_info.pack()
     B_monster_potion_small = Button(frame_monster_potion_1, text="Small Potion", command=lambda: monster_potion_1_small())
     B_monster_potion_ultra = Button(frame_monster_potion_1, text="Ultra Potion", command=lambda: monster_potion_1_ultra())
+    B_monster_potion_medium = Button(frame_monster_potion_1, text="Medium Potion", command=lambda: monster_potion_1_medium())
+    B_monster_potion_medium.pack()
     B_monster_potion_small.pack()
     B_monster_potion_ultra.pack()
     B_next_room = Button(frame_monster_potion_1, text="Next", command=lambda: monster_rest_to_room())
@@ -688,7 +842,8 @@ def get_monster():
     frame_monster_1.pack()
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon","orc","dark elf")
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon","orc","dark elf", "Mike", "Dave")
+
     monster = random.choice(monsters)
     # print(monster)
     opp_hp = 100
@@ -753,25 +908,49 @@ def get_monster():
         fight_monster()
         # opp_att = random.randint(50, 60)
     
+
     if monster == "orc":
-        m = 7
-        # monster 7
+        m = 9
+        # monster 9
         # Attack in range of 30-40
-        L_m7_intro = Label(frame_monster_1, text="You have to face orc\n"
+        L_m9_intro = Label(frame_monster_1, text="You have to face orc\n"
                                                  "The match starts. You get the first chance\n")
-        L_m7_intro.pack()
+        L_m9_intro.pack()
         fight_monster()
         # opp_att = random.randint(30, 40)
 
     if monster == "darkelf":
+        m = 10
+        # monster 10
+        # Attack in range of 60-70
+        L_m10_intro = Label(frame_monster_1, text="You have to face Dark Elf\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(60, 70)
+
+
+    if monster == "Mike":
+        m = 7
+        # monster 7
+        # Attack in range of 60-70
+        L_m7_intro = Label(frame_monster_1, text="You have to face Mike\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m7_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(60, 70)
+    
+    if monster == "Dave":
         m = 8
         # monster 8
-        # Attack in range of 60-70
-        L_m8_intro = Label(frame_monster_1, text="You have to face Dark Elf\n"
+        # Attack in range of 70-80
+        L_m8_intro = Label(frame_monster_1, text="You have to face Dave\n"
                                                  "The match starts. You get the first chance\n")
         L_m8_intro.pack()
         fight_monster()
-        # opp_att = random.randint(60, 70)
+        # opp_att = random.randint(70, 80)
+
+
 
 root = Tk()
 root.title("The Quest")

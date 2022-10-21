@@ -1,4 +1,6 @@
 # Defining a function named typing.
+from dbm import whichdb
+from shutil import which
 import time, sys
 from tkinter import *
 
@@ -29,6 +31,7 @@ Mythril_Armour = False  # decreases opp_att by 20
 Orichalium_Armour = False  # decereases opp_att by 30
 potion = 1  # increases hp by 30. Cost=300 gold
 ultra_potion = 1  # increases hp by 50. Cost=600 gold
+medium_potion=1  #increases hp by 40. cost=450 gold
 which_potion = 0  # variable that lets you select the potion that you want to take.
 
 
@@ -84,13 +87,13 @@ def fight():
             # If user decided to use potion
             elif d == 2:
                 typing("Which potion would you like to drink?\n")
-                which_potion = input("1=Potion, 2=Ultra Potion\n")
+                which_potion = input("1=Potion, 2=Ultra Potion, 3=Medium Potion\n")
 
                 # for invalid inputs of which_potion
-                while which_potion != "1" and which_potion != "2":
+                while which_potion != "1" and which_potion != "2" and which_potion!="3":
                     typing("Invalid input. Try again..")
-                    which_potion = input("1=Potion, 2=Ultra Potion")
-                    if which_potion == "1" or which_potion == "2":
+                    which_potion = input("1=Potion, 2=Ultra Potion, 3=Medium Potion")
+                    if which_potion == "1" or which_potion == "2" or which_potion=="3":
                         break
                     else:
                         pass
@@ -108,6 +111,11 @@ def fight():
                         hp = hp + 50
                     elif ultra_potion == 0:
                         typing("You don't have a ultra potion.\n")
+                elif int(which_potion)==3:
+                    if medium_potion>0:
+                        hp=hp+40
+                    elif medium_potion==0:
+                        typing("You don't have a medium potion with you.\n")
                 else:
                     typing("Invalid input. You lose your chance.\n")
                 typing(f"Your HP={hp}\n")
@@ -134,6 +142,7 @@ def potion_time():
     global hp
     global potion
     global ultra_potion
+    global medium_potion
     typing("You have some time to rest.\n")
     typing("Would you like to use a potion?\n")
     a = input("1=Yes, 2=No\n")
@@ -150,13 +159,13 @@ def potion_time():
             # If user wants to utilize potion break
     if int(a) == 1:
         typing("Which potion would you like to take?\n")
-        potion_chosen = input("1=Potion, 2=Ultra Potion\n")
+        potion_chosen = input("1=Potion, 2=Ultra Potion, 3=Medium Potion\n")
 
         # If invalid input for potion chosen
-        while int(potion_chosen) != 2 and int(potion_chosen) != 1:
+        while int(potion_chosen) != 2 and int(potion_chosen) != 1 and int(potion_chosen)!=3:
             typing("Invalid input. Try again.\n")
-            potion_chosen = input("1=Potion, 2=Ultra Potion\n")
-            if int(potion_chosen) == 2 or int(potion_chosen) == 1:
+            potion_chosen = input("1=Potion, 2=Ultra Potion, 3=Medium Potion\n")
+            if int(potion_chosen) == 2 or int(potion_chosen) == 1 or int(potion_chosen)==3:
                 break
             else:
                 pass
@@ -191,6 +200,20 @@ def potion_time():
                 typing(f"You now have {ultra_potion} Ultra Potions left\n")
             elif ultra_potion == 0:
                 typing("You don't have any ultra potions left with you.")
+        elif int(potion_chosen) == 3:
+            # If user's HP is already 100
+            if hp == 100:
+                typing("Your HP is already 100\n")
+            elif medium_potion > 0:
+                hp = hp + 40
+                # If user HP goes above 100
+                if hp > 100:
+                    hp = 100
+                medium_potion = medium_potion - 1
+                typing(f"Your HP={hp}\n")
+                typing(f"You now have {medium_potion} Medium Potions left\n")
+            elif medium_potion == 0:
+                typing("You don't have any medium potions left with you.")
         potion_time()
     # If user decides not to take any potion..
     elif int(a) == 2:
@@ -224,9 +247,9 @@ def shopping():
 
     # If user wants to buy potions
     if int(store1) == 1:
-        print(f"You currently have {potion} Small potions and {ultra_potion} Ultra potions with you.\n")
-        typing("We have 2 types of potion.\n")
-        typing("Small Potion and Ultra Potion\n")
+        print(f"You currently have {potion} Small potions, {ultra_potion} Ultra potions and {medium_potion} Medium potions with you.\n")
+        typing("We have 3 types of potion.\n")
+        typing("Small Potion, Ultra Potion and Medium Potion\n")
         typing("Would you like to know more about them?\n")
         z = input("1=Yes, 2=No\n")
 
@@ -244,18 +267,20 @@ def shopping():
             typing("Small potion that costs 250 gold will increase your HP by 30")
             typing("And..")
             typing("Ultra potion that costs 600 gold will increase your HP by 50")
+            typing("And..")
+            typing("Medium potion that costs 450 gold will increase your HP by 40")
         # if user doesn't need to know about potions
         if int(z) == 2:
             typing("Okay then..")
 
         typing("Which potion would you like to buy?")
-        shop_potion = input("1=Small Potion, 2=Ultra Potion")
+        shop_potion = input("1=Small Potion, 2=Ultra Potion, 3=Medium Potion")
 
         # for invalid inputs of shop potion
-        while int(shop_potion) != 1 and int(shop_potion) != 2:
+        while int(shop_potion) != 1 and int(shop_potion) != 2 and int(shop_potion)!=3:
             typing("Invalid input. Try again")
-            shop_potion = input("1=Small Potion, 2=Ultra Potion")
-            if int(shop_potion) == 1 or int(shop_potion) == 2:
+            shop_potion = input("1=Small Potion, 2=Ultra Potion, 3=Medium potion")
+            if int(shop_potion) == 1 or int(shop_potion) == 2 or int(shop_potion)==3:
                 break
             else:
                 pass
@@ -294,6 +319,23 @@ def shopping():
                 print(f"You now have {ultra_potion} Ultra Potions with you")
                 typing("Let's continue shopping..")
                 shopping()
+        #if user wants to buy medium potion
+        elif int(shop_potion) == 3:
+            typing("How many Medium Potions would you like to buy?\n")
+            typing("Cost=450 gold\n")
+            no_of_medium_potions = int(input(""))
+            if gold - (no_of_medium_potions * 450) < 0:
+                typing("You don't have enough gold.")
+                typing("Let's shop for something else.")
+                shopping()
+            else:
+                medium_potion = medium_potion + no_of_medium_potions
+                gold = gold - (450 * no_of_medium_potions)
+                print(f"You now have {gold} gold with you")
+                print(f"You now have {medium_potion} Medium Potions with you")
+                typing("Let's continue shopping..")
+                shopping()
+
 
     # If user wants to buy swords
     if int(store1) == 2:
@@ -519,7 +561,8 @@ while n != 8:
         break
     elif inside_room == "monster":
         typing("You have to face a monster...\n")
-        monsters = ("m1", "m2", "m3", "m4", "m5", "m6","m7","m8")
+
+        monsters = ("m1", "m2", "m3", "m4", "m5", "m6","m7","m8","m9","m10")
         monster = random.choice(monsters)
 
         if monster == "m1":
@@ -578,7 +621,8 @@ while n != 8:
 
         if monster == "m7":
             m = 7
-            # monster 6
+
+            # monster 7
             # Attack in range of 30-40
             typing("You have to face monster 7\n")
             opp_att = random.randint(30, 40)
@@ -594,6 +638,24 @@ while n != 8:
             fight()
             potion_time()
             
+
+            # monster 9
+            # Attack in range of 60-70
+            typing("You have to face monster 9\n")
+            opp_att = random.randint(60, 70)
+            fight()
+            potion_time()
+    
+        if monster == "m10":
+            m = 10
+            # monster 10
+            # Attack in range of 70-80
+            typing("You have to face monster 10\n")
+            opp_att = random.randint(70, 80)
+            fight()
+            potion_time()
+
+
         n = n + 1
 
     # if user gets a treasure box
