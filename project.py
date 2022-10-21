@@ -4,6 +4,8 @@ from shutil import which
 import time, sys
 from tkinter import *
 
+from GUI2 import Diamond_Armour
+
 def typing(text):
     for character in text:
         sys.stdout.write(character)
@@ -135,6 +137,8 @@ def fight():
                     hp = hp + 20
                 elif Orichalium_Armour == True:
                     hp = hp + 30
+                elif Diamond_Armour == True:
+                    hp = hp + 40
                 print(f"Your HP={hp}\n")
 
 
@@ -228,6 +232,7 @@ def shopping():
     global Iron_Armour
     global Mythril_Armour
     global Orichalium_Armour
+    global Diamond_Armour
     global potion
     global ultra_potion
     print("")
@@ -445,14 +450,16 @@ def shopping():
     # If user wants to buy armors
     if int(store1) == 3:
         # Checking what Armor does the user currently has..
-        if armor1 == True and armor2 == False and armor3 == False:
+        if armor1 == True and armor2 == False and armor3 == False and armor4==False:
             typing("Right now, you have Armor1")
-        elif armor1 == False and armor2 == True and armor3 == False:
+        elif armor1 == False and armor2 == True and armor3 == False and armor4==False:
             typing("Right now you have Armor2")
-        elif armor1 == False and armor2 == False and armor3 == True:
+        elif armor1 == False and armor2 == False and armor3 == True and armor4==False:
             typing("Right now you have Armor3")
-        typing("We have 3 types of armors..")
-        typing("Armor1, Armor2, Armor3")
+        elif armor1 == False and armor2 == False and armor3 == False and armor4==True:
+            typing("Right now you have Armor4")
+        typing("We have 4 types of armors..")
+        typing("Armor1, Armor2, Armor3, Armor4")
         typing("Would you like to know more about them?")
         x = input("1=Yes or 2=No")
 
@@ -476,13 +483,13 @@ def shopping():
 
         # asking user about which armor that they wants to buy
         typing("Which armor would you like to buy?\n")
-        shop_armor = input("1=Armor1, 2=Armor2, 3=Armor3")
+        shop_armor = input("1=Armor1, 2=Armor2, 3=Armor3 4=Armor4")
 
         # checking for incorrect inputs for shop_armor
-        while int(shop_armor) != 1 and int(shop_armor) != 2 and int(shop_armor) != 3:
+        while int(shop_armor) != 1 and int(shop_armor) != 2 and int(shop_armor) != 3 and int(shop_armor) != 4:
             typing("Invalid Input. Try again")
-            shop_armor = input("1=Armor1, 2=Armor2, 3=Armor3")
-            if shop_armor == 1 or shop_armor == 2 or shop_armor == 3:
+            shop_armor = input("1=Armor1, 2=Armor2, 3=Armor3 4=Armor4")
+            if shop_armor == 1 or shop_armor == 2 or shop_armor == 3 or shop_armor==4:
                 break
             else:
                 pass
@@ -501,6 +508,7 @@ def shopping():
                 armor1 = True
                 armor2 = False
                 armor3 = False
+                armor4 = False
                 gold = gold - 100
                 typing("You now have Armor1")
                 print(f"You are left with {gold} gold left")
@@ -521,6 +529,7 @@ def shopping():
                 armor1 = False
                 armor2 = True
                 armor3 = False
+                armor4 = False
                 gold = gold - 200
                 typing("You now have Armor2.")
                 print(f"You are left with {gold} gold.")
@@ -541,14 +550,36 @@ def shopping():
                 armor1 = False
                 armor2 = False
                 armor3 = True
+                armor4 = False
                 gold = gold - 300
                 typing("You now have Armor3")
                 print(f"You are left with {gold} gold.")
                 typing("Let's continue shopping..")
                 shopping()
 
+        # If user wants to buy Armor4
+        elif int(shop_armor) == 4:
+            # If user already has sword4
+            if armor4 == True:
+                typing("You are already carrying Armor4")
+            # If user doesn't have enough gold for sword4
+            elif gold < 300:
+                typing("You don't have enough gold.")
+                print(f"You own {gold} gold.")
+            # Purchasing armor4 and completing the transaction
+            elif armor4 == False:
+                armor1 = False
+                armor2 = False
+                armor3 = False
+                armor4 = True
+                gold = gold - 500
+                typing("You now have Armor4")
+                print(f"You are left with {gold} gold.")
+                typing("Let's continue shopping..")
+                shopping()
+
     # If user wants to exit the store.
-    if int(store1) == 4:
+    if int(store1) == 5:
         typing("Leaving the store..")
 
 
