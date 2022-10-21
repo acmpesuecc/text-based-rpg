@@ -561,7 +561,8 @@ while n != 8:
         break
     elif inside_room == "monster":
         typing("You have to face a monster...\n")
-        monsters = ("m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8")
+
+        monsters = ("m1", "m2", "m3", "m4", "m5", "m6","m7","m8","m9","m10")
         monster = random.choice(monsters)
 
         if monster == "m1":
@@ -620,21 +621,40 @@ while n != 8:
 
         if monster == "m7":
             m = 7
+
             # monster 7
-            # Attack in range of 60-70
+            # Attack in range of 30-40
             typing("You have to face monster 7\n")
+            opp_att = random.randint(30, 40)
+            fight()
+            potion_time()
+        
+        if monster == "m8":
+            m = 8
+            # monster 8
+            # Attack in range of 60-70
+            typing("You have to face monster 8\n")
+            opp_att = random.randint(60, 70)
+            fight()
+            potion_time()
+            
+
+            # monster 9
+            # Attack in range of 60-70
+            typing("You have to face monster 9\n")
             opp_att = random.randint(60, 70)
             fight()
             potion_time()
     
-        if monster == "m8":
-            m = 8
-            # monster 8
+        if monster == "m10":
+            m = 10
+            # monster 10
             # Attack in range of 70-80
-            typing("You have to face monster 8\n")
+            typing("You have to face monster 10\n")
             opp_att = random.randint(70, 80)
             fight()
             potion_time()
+
 
         n = n + 1
 
