@@ -840,6 +840,7 @@ def monster_counterattack_1():
         L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
         L_monster_counterattack_result.pack()
         you_died()
+    elif hp >100 : hp == 100 
     else:
         L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
         L_monster_counterattack_result.pack()
@@ -959,7 +960,7 @@ def get_monster():
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop")
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop","Robert","Carlson")
 
     monster = random.choice(monsters)
     # print(monster)
@@ -1138,6 +1139,25 @@ def get_monster():
         # monster 16
         # Attack in range of 70-80
         L_m10_intro = Label(frame_monster_1, text="You have to face UrMom (A UrGhast)\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
+    if monster == "Robert":
+        m = 17
+        # monster 17
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face Robert\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
+
+    if monster == "Carlson":
+        m = 18
+        # monster 18
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face Carlson\n"
                                                  "The match starts. You get the first chance\n")
         L_m10_intro.pack()
         fight_monster()
