@@ -688,7 +688,7 @@ def get_monster():
     frame_monster_1.pack()
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon")
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave")
     monster = random.choice(monsters)
     # print(monster)
     opp_hp = 100
@@ -752,7 +752,27 @@ def get_monster():
         L_m6_intro.pack()
         fight_monster()
         # opp_att = random.randint(50, 60)
+    
 
+    if monster == "Mike":
+        m = 7
+        # monster 7
+        # Attack in range of 60-70
+        L_m7_intro = Label(frame_monster_1, text="You have to face Mike\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m7_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(60, 70)
+    
+    if monster == "Dave":
+        m = 8
+        # monster 8
+        # Attack in range of 70-80
+        L_m8_intro = Label(frame_monster_1, text="You have to face Dave\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m8_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
 
 
 root = Tk()
