@@ -15,6 +15,8 @@ Orichalium_Sword = False  # increases attack by 40
 Iron_Armour = False  # decreases opp_att by 10
 Mythril_Armour = False  # decreases opp_att by 20
 Orichalium_Armour = False  # decreases opp_att by 30
+BunSamosa_Armour= False #decreases opp_att by 50
+ACM_Armour= False #decreases opp_att by 60
 potion = 1  # increases hp by 30. Cost=300 gold
 ultra_potion = 1  # increases hp by 50. Cost=600 gold
 medium_potion=1 #increases hp by 40, cost=450 gold
@@ -371,6 +373,8 @@ def shop_armor():
     global Iron_Armour
     global Mythril_Armour
     global Orichalium_Armour
+    global BunSamosa_Armour
+    global ACM_Armour
     frame_shop_1.destroy()
     frame_shop_armor = Frame(root)
     frame_shop_armor.pack()
@@ -380,11 +384,17 @@ def shop_armor():
     elif Mythril_Armour:
         L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Mythril_Armour")
         L_Shop_armor_owned.pack()
+    elif BunSamosa_Armour:
+        L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have BunSamosa_Armour")
+        L_Shop_armor_owned.pack()
+    elif ACM_Armour:
+        L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have ACM_Armour")
+        L_Shop_armor_owned.pack()
     elif Orichalium_Armour:
         L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Orichalium_Armour")
         L_Shop_armor_owned.pack()
-    L_Shop_armor_intro = Label(frame_shop_armor, text="We have 3 types of armors..\n"
-                                                      "Iron_Armour, Mythril_Armour and Orichalium_Armour\n"
+    L_Shop_armor_intro = Label(frame_shop_armor, text="We have 5 types of armors..\n"
+                                                      "Iron_Armour, Mythril_Armour, Orichalium_Armour, BunSamosa_Armour and ACM_Armour\n"
                                                       "Would you like to know more about them?\n")
     L_Shop_armor_intro.pack()
     B_Shop_armor_Y = Button(frame_shop_armor, text="Yes", command=lambda: shop_armor_yes())
@@ -399,7 +409,9 @@ def shop_armor_yes():
     frame_shop_armor_yes.pack()
     L_Shop_armor_Y_info = Label(frame_shop_armor_yes, text="Iron_Armour costs 200 gold and increases your attack by 20\n"
                                                             "Mythril_Armour costs 300 gold and increases your attack by 30\n"
-                                                            "Orichalium_Armour costs 400 gold and increases your attack by 40\n")
+                                                            "Orichalium_Armour costs 400 gold and increases your attack by 40\n"
+                                                            "BunSamosa_Armour costs 500 gold and increases your attack by 50\n"
+                                                            "ACM_Armour costs 600 gold and increases your attack by 60\n")
     L_Shop_armor_Y_info.pack()
 
     B_Shop_armor_Yes = Button(frame_shop_armor_yes, text="Next", command=lambda: shop_armor_yestono())
@@ -422,6 +434,10 @@ def shop_armor_no():
     B_Shop_armors_armor2.pack()
     B_Shop_armors_armor3 = Button(frame_shop_armors_no, text="Orichalium_Armour", command=lambda: shop_armor_armor3())
     B_Shop_armors_armor3.pack()
+    B_Shop_armors_armor4= Button(frame_shop_armors_no, text="BunSamosa_Armour", command=lambda: shop_armor_armor4())
+    B_Shop_armors_armor4.pack()
+    B_Shop_armors_armor5 = Button(frame_shop_armors_no, text="ACM_Armour", command=lambda: shop_armor_armor5())
+    B_Shop_armors_armor5.pack()
     B_Shop_armors_back = Button(frame_shop_armors_no, text="back", command=lambda: shop_armor_to_main())
     B_Shop_armors_back.pack(side=BOTTOM)
 
@@ -471,6 +487,7 @@ def shop_armor_armor2():
         L_shop_armors_armor2 = Label(frame_shop_armors_no, text="You already have Mythril_Armour")
         L_shop_armors_armor2.pack()
 
+
 def shop_armor_armor3():
     global Iron_Armour
     global Mythril_Armour
@@ -493,6 +510,64 @@ def shop_armor_armor3():
     else:
         L_shop_armors_armor3 = Label(frame_shop_armors_no, text="You already have Orichalium_Armour")
         L_shop_armors_armor3.pack()
+
+def shop_armor_armor4():
+    global Iron_Armour
+    global Mythril_Armour
+    global Orichalium_Armour
+    global BunSamosa_Armour
+    global ACM_Armour
+
+    global gold
+    if BunSamosa_Armour== False:
+        if gold > 500:
+            gold = gold - 500
+            L_shop_armors_armor4 = Label(frame_shop_armors_no, text="You now have BunSamosa_Armour\n"
+                                                                    f"You now have {gold} gold")
+            L_shop_armors_armor4.pack()
+            Iron_Armour = False
+            Mythril_Armour = False
+            Orichalium_Armour = False
+            BunSamosa_Armour = True
+            ACM_Armour = False
+
+        else:
+            L_shop_armors_armor4 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
+                                                                    f"You have {gold} gold")
+            L_shop_armors_armor4.pack()
+    else:
+        L_shop_armors_armor4 = Label(frame_shop_armors_no, text="You already have BunSamosa_Armour")
+        L_shop_armors_armor4.pack()
+
+def shop_armor_armor5():
+    global Iron_Armour
+    global Mythril_Armour
+    global Orichalium_Armour
+    global BunSamosa_Armour
+    global ACM_Armour
+
+    global gold
+    if BunSamosa_Armour== False:
+        if gold > 600:
+            gold = gold - 600
+            L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You now have ACM_Armour\n"
+                                                                    f"You now have {gold} gold")
+            L_shop_armors_armor5.pack()
+            Iron_Armour = False
+            Mythril_Armour = False
+            Orichalium_Armour = False
+            BunSamosa_Armour = False
+            ACM_Armour = True
+
+        else:
+            L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
+                                                                    f"You have {gold} gold")
+            L_shop_armors_armor5.pack()
+    else:
+        L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You already have ACM_Armour")
+        L_shop_armors_armor5.pack()
+
+
 
 def shop_armor_to_main():
     frame_shop_armors_no.destroy()
@@ -517,6 +592,8 @@ def shop():
     global potion
     global ultra_potion
     global frame_shop_1
+    global BunSamosa_Armour
+    global ACM_Armour
     frame_shop_1 = Frame(root)
     frame_shop_1.pack()
     L_Shop_Wel=Label(frame_shop_1, text="Welcome to the store..\nWhat would you like to buy?\n")
@@ -767,7 +844,8 @@ def get_monster():
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper""golum","rhegar")
+
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","golum","rhegar", "Lola", "Cyclop")
 
     monster = random.choice(monsters)
     # print(monster)
@@ -912,6 +990,25 @@ def get_monster():
         L_m1_intro.pack()
         fight_monster()
         # opp_att = random.randint(90,100)
+  if monster == "Lola":
+        m = 19
+        # monster 19
+        # Attack in range of 40-70
+        L_m19_intro = Label(frame_monster_1, text="You have to face Lola\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m19_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(50, 60)
+    
+    if monster == "Cyclop":
+        m = 20
+        # monster 20
+        # Attack in range of 50-70
+        L_m20_intro = Label(frame_monster_1, text="You have to face Cyclop\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m20_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(50, 60)
 
 
     if monster == "Siri":
