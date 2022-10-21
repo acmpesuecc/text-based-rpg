@@ -767,8 +767,8 @@ def get_bossmonster():
     frame_monster_1.pack()
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a boss monster.")
     L_monster_Wel.pack()
-    monsters = ("Demon Slayer","Big Tooth")
-    monster = random.choice(monsters)
+    bossmonsters = ("Demon Slayer","Big Tooth")
+    monster = random.choice(bossmonsters)
     # print(monster)
     opp_hp = 100
     if monster == "Demon Slayer":
