@@ -759,7 +759,7 @@ def get_monster():
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf", "Lola", "Cyclop")
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper", "Lola", "Cyclop")
 
     monster = random.choice(monsters)
     # print(monster)
@@ -867,8 +867,8 @@ def get_monster():
         fight_monster()
         # opp_att = random.randint(70, 80)
     if monster == "severus":
-        m = 9
-        # monster 9
+        m = 11
+        # monster 11
         # Attack in range of 80-90
         L_m1_intro = Label(frame_monster_1, text="You have to face severus\n"
                                                  "The match starts. You get the first chance\n")
@@ -876,8 +876,8 @@ def get_monster():
         fight_monster()
         # opp_att = random.randint(80,90)
     if monster == "snape":
-        m = 10
-        # monster 10
+        m = 12
+        # monster 12
         # Attack in range of 90-100
         L_m1_intro = Label(frame_monster_1, text="You have to face snape\n"
                                                  "The match starts. You get the first chance\n")
@@ -904,6 +904,25 @@ def get_monster():
         fight_monster()
         # opp_att = random.randint(50, 60)
 
+
+    if monster == "Siri":
+        m = 13
+        # monster 13
+        # Attack in range of 70-80
+        L_m9_intro = Label(frame_monster_1, text="You have to face Siri\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m9_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)  
+    if monster == "GrimReaper":
+        m = 14
+        # monster 14
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face Dave\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
 
 
 root = Tk()
