@@ -672,6 +672,22 @@ while n != 10:
             opp_att = random.randint(90, 100)
             fight()
             potion_time()
+        if monster == "m13":
+            m = 12
+            # monster 12
+            # Attack in range of 90-100
+            typing("You have to face monster 13\n")
+            opp_att = random.randint(100, 110)
+            fight()
+            potion_time()
+        if monster == "m14":
+            m = 12
+            # monster 12
+            # Attack in range of 90-100
+            typing("You have to face monster 14\n")
+            opp_att = random.randint(110, 120)
+            fight()
+            potion_time()
 
 
         n = n + 1
