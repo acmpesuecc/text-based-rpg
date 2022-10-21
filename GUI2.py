@@ -17,6 +17,8 @@ Mythril_Armour = False  # decreases opp_att by 20
 Orichalium_Armour = False  # decreases opp_att by 30
 Jade_Armour = False # increases hp by 10
 Diamond_Armour = False #increases hp by 20
+BunSamosa_Armour= False #decreases opp_att by 50
+ACM_Armour= False #decreases opp_att by 60
 potion = 1  # increases hp by 30. Cost=300 gold
 ultra_potion = 1  # increases hp by 50. Cost=600 gold
 medium_potion=1 #increases hp by 40, cost=450 gold
@@ -373,6 +375,10 @@ def shop_armor():
     global Iron_Armour
     global Mythril_Armour
     global Orichalium_Armour
+    global Jade_Armour
+    global Diamond_Armour
+    global BunSamosa_Armour
+    global ACM_Armour
     frame_shop_1.destroy()
     frame_shop_armor = Frame(root)
     frame_shop_armor.pack()
@@ -381,6 +387,12 @@ def shop_armor():
         L_Shop_armor_owned.pack()
     elif Mythril_Armour:
         L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Mythril_Armour")
+        L_Shop_armor_owned.pack()
+    elif BunSamosa_Armour:
+        L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have BunSamosa_Armour")
+        L_Shop_armor_owned.pack()
+    elif ACM_Armour:
+        L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have ACM_Armour")
         L_Shop_armor_owned.pack()
     elif Orichalium_Armour:
         L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Orichalium_Armour")
@@ -391,8 +403,8 @@ def shop_armor():
     elif Diamond_Armour:
         L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Diamond_Armour")
         L_Shop_armor_owned.pack()    
-    L_Shop_armor_intro = Label(frame_shop_armor, text="We have 5 types of armors..\n"
-                                                      "Iron_Armour, Mythril_Armour,Orichalium_Armour, Jade_Armour and Diamond_Armour\n"
+    L_Shop_armor_intro = Label(frame_shop_armor, text="We have 7 types of armors..\n"
+                                                      "Iron_Armour, Mythril_Armour, Orichalium_Armour, BunSamosa_Armour,ACM_Armour,Jade_Armour and Diamond_Armour\n"
                                                       "Would you like to know more about them?\n")
     L_Shop_armor_intro.pack()
     B_Shop_armor_Y = Button(frame_shop_armor, text="Yes", command=lambda: shop_armor_yes())
@@ -409,7 +421,9 @@ def shop_armor_yes():
                                                             "Mythril_Armour costs 300 gold and increases your attack by 30\n"
                                                             "Orichalium_Armour costs 400 gold and increases your attack by 40\n"
                                                             "Jade_Armour costs 250 gold and increases your hp by 10\n"
-                                                            "Diamond_Armour costs 350 gold and increases your hp by 20\n")
+                                                            "Diamond_Armour costs 350 gold and increases your hp by 20\n"
+                                                            "BunSamosa_Armour costs 500 gold and increases your attack by 50\n"
+                                                            "ACM_Armour costs 600 gold and increases your attack by 60\n")
     L_Shop_armor_Y_info.pack()
 
     B_Shop_armor_Yes = Button(frame_shop_armor_yes, text="Next", command=lambda: shop_armor_yestono())
@@ -436,6 +450,10 @@ def shop_armor_no():
     B_Shop_armors_armor4.pack()
     B_Shop_armors_armor5 = Button(frame_shop_armors_no, text="Diamond_Armour", command=lambda: shop_armor_armor5())
     B_Shop_armors_armor5.pack()    
+    B_Shop_armors_armor6= Button(frame_shop_armors_no, text="BunSamosa_Armour", command=lambda: shop_armor_armor6())
+    B_Shop_armors_armor6.pack()
+    B_Shop_armors_armor7 = Button(frame_shop_armors_no, text="ACM_Armour", command=lambda: shop_armor_armor7())
+    B_Shop_armors_armor7.pack()
     B_Shop_armors_back = Button(frame_shop_armors_no, text="back", command=lambda: shop_armor_to_main())
     B_Shop_armors_back.pack(side=BOTTOM)
 
@@ -446,6 +464,8 @@ def shop_armor_armor1():
     global gold
     global Jade_Armour
     global Diamond_Armour
+    global BunSamosa_Armour
+    global ACM_Armour
     if Iron_Armour == False:
         if gold > 200:
             gold = gold - 200
@@ -457,6 +477,8 @@ def shop_armor_armor1():
             Orichalium_Armour = False
             Jade_Armour = False
             Diamond_Armour = False
+            ACM_Armour = False
+            BunSamosa_Armour = False
 
         else:
             L_shop_armors_armor1 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -473,6 +495,8 @@ def shop_armor_armor2():
     global gold
     global Jade_Armour
     global Diamond_Armour
+    global BunSamosa_Armour
+    global ACM_Armour
     if Mythril_Armour == False:
         if gold > 300:
             gold = gold - 300
@@ -484,6 +508,8 @@ def shop_armor_armor2():
             Orichalium_Armour = False
             Jade_Armour = False
             Diamond_Armour = False
+            ACM_Armour = False
+            BunSamosa_Armour = False
 
         else:
             L_shop_armors_armor2 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -493,6 +519,7 @@ def shop_armor_armor2():
         L_shop_armors_armor2 = Label(frame_shop_armors_no, text="You already have Mythril_Armour")
         L_shop_armors_armor2.pack()
 
+
 def shop_armor_armor3():
     global Iron_Armour
     global Mythril_Armour
@@ -500,6 +527,8 @@ def shop_armor_armor3():
     global gold
     global Jade_Armour
     global Diamond_Armour
+    global BunSamosa_Armour
+    global ACM_Armour
     if Orichalium_Armour == False:
         if gold > 400:
             gold = gold - 400
@@ -511,6 +540,8 @@ def shop_armor_armor3():
             Orichalium_Armour = True
             Jade_Armour = False
             Diamond_Armour = False
+            ACM_Armour = False
+            BunSamosa_Armour = False
 
         else:
             L_shop_armors_armor3 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -527,6 +558,8 @@ def shop_armor_armor4():
     global gold
     global Jade_Armour
     global Diamond_Armour
+    global BunSamosa_Armour
+    global ACM_Armour
     if Jade_Armour == False:
         if gold > 250:
             gold = gold - 250
@@ -538,6 +571,8 @@ def shop_armor_armor4():
             Orichalium_Armour = False
             Jade_Armour = True
             Diamond_Armour = False
+            ACM_Armour = False
+            BunSamosa_Armour = False
 
         else:
             L_shop_armors_armor4 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -546,7 +581,7 @@ def shop_armor_armor4():
     else:
         L_shop_armors_armor4 = Label(frame_shop_armors_no, text="You already have Jade_Armour")
         L_shop_armors_armor4.pack()
-
+        
 def shop_armor_armor5():
     global Iron_Armour
     global Mythril_Armour
@@ -554,6 +589,8 @@ def shop_armor_armor5():
     global gold
     global Jade_Armour
     global Diamond_Armour
+    global BunSamosa_Armour
+    global ACM_Armour
     if Diamond_Armour == False:
         if gold > 350:
             gold = gold - 350
@@ -565,6 +602,8 @@ def shop_armor_armor5():
             Orichalium_Armour = False
             Jade_Armour = False
             Diamond_Armour = True
+            ACM_Armour = False
+            BunSamosa_Armour = False
 
         else:
             L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -573,6 +612,70 @@ def shop_armor_armor5():
     else:
         L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You already have Diamond_Armour")
         L_shop_armors_armor5.pack()
+
+def shop_armor_armor6():
+    global Iron_Armour
+    global Mythril_Armour
+    global Orichalium_Armour
+    global gold
+    global Jade_Armour
+    global Diamond_Armour
+    global BunSamosa_Armour
+    global ACM_Armour
+    if ACM_Armour == False:
+        if gold > 500:
+            gold = gold - 500
+            L_shop_armors_armor6 = Label(frame_shop_armors_no, text="You now have ACM_Armour\n"
+                                                                    f"You now have {gold} gold")
+            L_shop_armors_armor6.pack()
+            Iron_Armour = False
+            Mythril_Armour = False
+            Orichalium_Armour = False
+            Jade_Armour = False
+            Diamond_Armour = False
+            ACM_Armour = True
+            BunSamosa_Armour = False
+
+        else:
+            L_shop_armors_armor6 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
+                                                                    f"You have {gold} gold")
+            L_shop_armors_armor6.pack()
+    else:
+        L_shop_armors_armor6 = Label(frame_shop_armors_no, text="You already have ACM_Armour")
+        L_shop_armors_armor6.pack()
+  
+def shop_armor_armor7():
+    global Iron_Armour
+    global Mythril_Armour
+    global Orichalium_Armour
+    global gold
+    global Jade_Armour
+    global Diamond_Armour
+    global BunSamosa_Armour
+    global ACM_Armour
+    if BunSamosa_Armour == False:
+        if gold > 600:
+            gold = gold - 600
+            L_shop_armors_armor7 = Label(frame_shop_armors_no, text="You now have BunSamosa_Armour\n"
+                                                                    f"You now have {gold} gold")
+            L_shop_armors_armor7.pack()
+            Iron_Armour = False
+            Mythril_Armour = False
+            Orichalium_Armour = False
+            Jade_Armour = False
+            Diamond_Armour = False
+            ACM_Armour = False
+            BunSamosa_Armour = True
+
+        else:
+            L_shop_armors_armor7 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
+                                                                    f"You have {gold} gold")
+            L_shop_armors_armor7.pack()
+    else:
+        L_shop_armors_armor7 = Label(frame_shop_armors_no, text="You already have BunSamosa_Armour")
+        L_shop_armors_armor7.pack()
+
+
 
 def shop_armor_to_main():
     frame_shop_armors_no.destroy()
@@ -597,6 +700,10 @@ def shop():
     global potion
     global ultra_potion
     global frame_shop_1
+    global BunSamosa_Armour
+    global ACM_Armour
+    global Jade_Armour
+    global Diamond_Armour
     frame_shop_1 = Frame(root)
     frame_shop_1.pack()
     L_Shop_Wel=Label(frame_shop_1, text="Welcome to the store..\nWhat would you like to buy?\n")
@@ -852,7 +959,7 @@ def get_monster():
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper")
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop")
 
     monster = random.choice(monsters)
     # print(monster)
@@ -977,6 +1084,25 @@ def get_monster():
         L_m1_intro.pack()
         fight_monster()
         # opp_att = random.randint(90,100)
+    if monster == "Lola":
+        m = 19
+        # monster 19
+        # Attack in range of 40-70
+        L_m19_intro = Label(frame_monster_1, text="You have to face Lola\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m19_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(50, 60)
+    
+    if monster == "Cyclop":
+        m = 20
+        # monster 20
+        # Attack in range of 50-70
+        L_m20_intro = Label(frame_monster_1, text="You have to face Cyclop\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m20_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(50, 60)
 
 
     if monster == "Siri":
@@ -993,6 +1119,25 @@ def get_monster():
         # monster 14
         # Attack in range of 70-80
         L_m10_intro = Label(frame_monster_1, text="You have to face Dave\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
+    
+    if monster == "dementor":
+        m = 15
+        # monster 15
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face A Dementor\n"
+                                                 "The match starts. You get the first chance as your life\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
+    if monster == "UrGhast":
+        m = 16
+        # monster 16
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face UrMom (A UrGhast)\n"
                                                  "The match starts. You get the first chance\n")
         L_m10_intro.pack()
         fight_monster()
