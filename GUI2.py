@@ -19,24 +19,28 @@ potion = 1  # increases hp by 30. Cost=300 gold
 ultra_potion = 1  # increases hp by 50. Cost=600 gold
 which_potion = 0  # variable that lets you select the potion that you want to take.
 
-def get_room():
-    room = ("monster", "shop", "treasure box", "bossmonster", "shop")
-    inside_room = random.choice(room)
-    # print(inside_room)
-    if inside_room == "shop":
-        frame1.destroy()
-        shop()
-    elif inside_room == "treasure box":
-        frame1.destroy()
-        treasure_box()
-    elif inside_room == "monster":
-        frame1.destroy()
-        get_monster()
 
-    elif inside_room == "bossmonster":
+def get_room():
+    rav = 0
+    if (rav%20!= 0):  # a loop to make sure that the bossmonster doesnt appear until upto 20 iterations in the game
+        rav += 1
+        room = ("monster", "shop", "treasure box", "monster", "shop")
+        inside_room = random.choice(room)
+        # print(inside_room)
+        if inside_room == "shop":
+            frame1.destroy()
+            shop()
+        elif inside_room == "treasure box":
+            frame1.destroy()
+            treasure_box()
+        elif inside_room == "monster":
+            frame1.destroy()
+            get_monster()
+
+    else:
+        rav += 1
         frame1.destroy()
         get_bossmonster()
-
 
 # treasure box room
 def treasure_box():
