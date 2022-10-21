@@ -844,7 +844,7 @@ def get_monster():
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper", "Lola", "Cyclop")
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop")
 
     monster = random.choice(monsters)
     # print(monster)
@@ -969,7 +969,7 @@ def get_monster():
         L_m1_intro.pack()
         fight_monster()
         # opp_att = random.randint(90,100)
-  if monster == "Lola":
+    if monster == "Lola":
         m = 19
         # monster 19
         # Attack in range of 40-70
@@ -1004,6 +1004,25 @@ def get_monster():
         # monster 14
         # Attack in range of 70-80
         L_m10_intro = Label(frame_monster_1, text="You have to face Dave\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
+    
+    if monster == "dementor":
+        m = 15
+        # monster 15
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face A Dementor\n"
+                                                 "The match starts. You get the first chance as your life\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
+    if monster == "UrGhast":
+        m = 16
+        # monster 16
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face UrMom (A UrGhast)\n"
                                                  "The match starts. You get the first chance\n")
         L_m10_intro.pack()
         fight_monster()
