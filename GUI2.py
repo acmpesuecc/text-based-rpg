@@ -31,7 +31,7 @@ def get_room():
         rav += 1
         room = ( "shop", "treasure box","monster")
         inside_room = random.choice(room)
-        print(inside_room)
+        #print(inside_room)
         if inside_room == "shop":
             frame1.destroy()
             shop()
