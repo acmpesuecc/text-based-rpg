@@ -791,7 +791,7 @@ def get_monster():
     frame_monster_1.pack()
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon")
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon","BigBear","FuriousPanda")
     monster = random.choice(monsters)
     # print(monster)
     opp_hp = 100
@@ -855,6 +855,26 @@ def get_monster():
         L_m6_intro.pack()
         fight_monster()
         # opp_att = random.randint(50, 60)
+
+    if monster == "BigBear":
+        m = 7
+        # monster 7
+        # Attack in range of 60-70
+        L_m1_intro = Label(frame_monster_1, text="You have to face BigBear\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m1_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(50, 60)
+
+    if monster == "FuriousPanda":
+        m = 8
+        # monster 8
+        # Attack in range of 60-70
+        L_m1_intro = Label(frame_monster_1, text="You have to face FuriousPanda\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m1_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(60, 70)
 
 
 def quit_screen():
