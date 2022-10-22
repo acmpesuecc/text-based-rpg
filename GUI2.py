@@ -635,19 +635,24 @@ def monster_counterattack_1():
         hp = hp + 20
     elif Orichalium_Armour == True:
         hp = hp + 30
+
     if hp < 0:
         hp = 0
         L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
         L_monster_counterattack_result.pack()
         you_died()
-    elif hp >100 : hp == 100 
+
+    
+
     else:
+        if hp >100 : hp = 100 
         L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
         L_monster_counterattack_result.pack()
         B_monster_attack_2 = Button(frame_monster_attack_1, text="Attack", command=lambda: monster_counter_to_attack())
         B_monster_potion_2 = Button(frame_monster_attack_1, text="Potion", command=lambda: monster_counter_to_potion())
         B_monster_attack_2.pack()
         B_monster_potion_2.pack()
+        
 def monster_counter_to_potion():
     frame_monster_attack_1.destroy()
     monster_potion_1()
