@@ -1099,7 +1099,9 @@ def inventory():
     global Orichalium_Armour 
     global potion 
     global ultra_potion 
-    global medium_potion 
+    global medium_potion
+    global BunSamosa_Armour
+    global ACM_Armour 
     newWindow = Toplevel(root)
  
     newWindow.title("inventory")
@@ -1119,6 +1121,10 @@ def inventory():
         mythril_a_l=Label(newWindow,text ="mythril armour\n").pack()
     if(Orichalium_Armour):
         orichalium_a_l=Label(newWindow,text ="orichalium armour\n").pack()
+    if(BunSamosa_Armour):
+        bun_a_l=Label(newWindow,text ="bunsamosa armour\n").pack()
+    if(ACM_Armour):
+        acm_a_l=Label(newWindow,text ="acm armour\n").pack()
     if(potion!=0):
         small_label=Label(newWindow,text =f"small potion x {potion}\n").pack()
     else:
