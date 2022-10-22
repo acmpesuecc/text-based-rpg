@@ -726,6 +726,7 @@ def monster_counterattack_1():
         L_monster_counterattack_result.pack()
         you_died()
     else:
+        if hp > 100 : hp = 100 
         L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
         L_monster_counterattack_result.pack()
         B_monster_attack_2 = Button(frame_monster_attack_1, text="Attack", command=lambda: monster_counter_to_attack())
