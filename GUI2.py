@@ -24,7 +24,7 @@ which_potion = 0  # variable that lets you select the potion that you want to ta
 
 
 def get_room():
-    rav = 0
+    rav = 1
     if (rav%20!= 0):  # a loop to make sure that the bossmonster doesnt appear until upto 20 iterations in the game
         rav += 1
         room = ("monster", "shop", "treasure box", "monster", "shop")
