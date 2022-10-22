@@ -1090,11 +1090,56 @@ def get_bossmonster():
 
 
 
+def inventory():
+    global Iron_Sword 
+    global Mythril_Sword 
+    global Orichalium_Sword 
+    global Iron_Armour 
+    global Mythril_Armour
+    global Orichalium_Armour 
+    global potion 
+    global ultra_potion 
+    global medium_potion 
+    newWindow = Toplevel(root)
+ 
+    newWindow.title("inventory")
+ 
+    newWindow.geometry("250x250")
+    Label(newWindow,text ="welcome to inventory").pack()
+
+    if(Iron_Sword):
+        iron_s_l=Label(newWindow,text ="iron sword\n").pack()
+    if(Mythril_Sword):
+        mythril_s_l=Label(newWindow,text ="mythril sword\n").pack()
+    if(Orichalium_Sword):
+        orichallium_s_l=Label(newWindow,text ="orichalium sword\n").pack()
+    if(Iron_Armour):
+        iron_a_l=Label(newWindow,text ="iron armour\n").pack()
+    if(Mythril_Armour):
+        mythril_a_l=Label(newWindow,text ="mythril armour\n").pack()
+    if(Orichalium_Armour):
+        orichalium_a_l=Label(newWindow,text ="orichalium armour\n").pack()
+    if(potion!=0):
+        small_label=Label(newWindow,text =f"small potion x {potion}\n").pack()
+    else:
+        small_label=Label(newWindow,text ="").pack()
+    if(medium_potion!=0):
+        medium_label=Label(newWindow,text =f"medium potion x {medium_potion}\n").pack()
+    else:
+        medium_label=Label(newWindow,text ="").pack()
+    if(ultra_potion!=0):
+        ultra_label=Label(newWindow,text =f"ultra potion x {ultra_potion}\n").pack()
+    else:
+        ultra_label=Label(newWindow,text ="").pack()
+ 
+ 
+
 root = Tk()
+inventory_button=Button(text="inventory",command=inventory)
+inventory_button.pack(side=BOTTOM)
 root.title("The Quest")
 frame1 = Frame(root,padx=50, pady=50)
 frame1.pack(padx=50, pady=50)
-
 root.geometry("500x500")
 label = Label(frame1, text="Welcome to The Quest!!\nStory...\nIntro")
 label.pack()
