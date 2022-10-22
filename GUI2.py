@@ -24,7 +24,7 @@ which_potion = 0  # variable that lets you select the potion that you want to ta
 
 
 def get_room():
-    rav = 0
+    rav = 1
     if (rav%20!= 0):  # a loop to make sure that the bossmonster doesnt appear until upto 20 iterations in the game
         rav += 1
         room = ("monster", "shop", "treasure box", "monster", "shop")
@@ -725,6 +725,7 @@ def monster_counterattack_1():
         L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
         L_monster_counterattack_result.pack()
         you_died()
+    elif hp >100 : hp == 100 
     else:
         if hp > 100 : hp = 100 
         L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
@@ -846,7 +847,8 @@ def get_monster():
     L_monster_Wel.pack()
 
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","golum","rhegar", "Lola", "Cyclop")
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop","Robert","Carlson","golum","rhegar")
+
 
     monster = random.choice(monsters)
     # print(monster)
@@ -991,7 +993,7 @@ def get_monster():
         L_m1_intro.pack()
         fight_monster()
         # opp_att = random.randint(90,100)
-  if monster == "Lola":
+    if monster == "Lola":
         m = 19
         # monster 19
         # Attack in range of 40-70
@@ -1026,6 +1028,44 @@ def get_monster():
         # monster 14
         # Attack in range of 70-80
         L_m10_intro = Label(frame_monster_1, text="You have to face Dave\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
+    
+    if monster == "dementor":
+        m = 15
+        # monster 15
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face A Dementor\n"
+                                                 "The match starts. You get the first chance as your life\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
+    if monster == "UrGhast":
+        m = 16
+        # monster 16
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face UrMom (A UrGhast)\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
+    if monster == "Robert":
+        m = 17
+        # monster 17
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face Robert\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m10_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(70, 80)
+
+    if monster == "Carlson":
+        m = 18
+        # monster 18
+        # Attack in range of 70-80
+        L_m10_intro = Label(frame_monster_1, text="You have to face Carlson\n"
                                                  "The match starts. You get the first chance\n")
         L_m10_intro.pack()
         fight_monster()
@@ -1073,11 +1113,62 @@ def get_bossmonster():
 
 
 
+def inventory():
+    global Iron_Sword 
+    global Mythril_Sword 
+    global Orichalium_Sword 
+    global Iron_Armour 
+    global Mythril_Armour
+    global Orichalium_Armour 
+    global potion 
+    global ultra_potion 
+    global medium_potion
+    global BunSamosa_Armour
+    global ACM_Armour 
+    newWindow = Toplevel(root)
+ 
+    newWindow.title("inventory")
+ 
+    newWindow.geometry("250x250")
+    Label(newWindow,text ="welcome to inventory").pack()
+
+    if(Iron_Sword):
+        iron_s_l=Label(newWindow,text ="iron sword\n").pack()
+    if(Mythril_Sword):
+        mythril_s_l=Label(newWindow,text ="mythril sword\n").pack()
+    if(Orichalium_Sword):
+        orichallium_s_l=Label(newWindow,text ="orichalium sword\n").pack()
+    if(Iron_Armour):
+        iron_a_l=Label(newWindow,text ="iron armour\n").pack()
+    if(Mythril_Armour):
+        mythril_a_l=Label(newWindow,text ="mythril armour\n").pack()
+    if(Orichalium_Armour):
+        orichalium_a_l=Label(newWindow,text ="orichalium armour\n").pack()
+    if(BunSamosa_Armour):
+        bun_a_l=Label(newWindow,text ="bunsamosa armour\n").pack()
+    if(ACM_Armour):
+        acm_a_l=Label(newWindow,text ="acm armour\n").pack()
+    if(potion!=0):
+        small_label=Label(newWindow,text =f"small potion x {potion}\n").pack()
+    else:
+        small_label=Label(newWindow,text ="").pack()
+    if(medium_potion!=0):
+        medium_label=Label(newWindow,text =f"medium potion x {medium_potion}\n").pack()
+    else:
+        medium_label=Label(newWindow,text ="").pack()
+    if(ultra_potion!=0):
+        ultra_label=Label(newWindow,text =f"ultra potion x {ultra_potion}\n").pack()
+    else:
+        ultra_label=Label(newWindow,text ="").pack()
+ 
+ 
+
 root = Tk()
+inventory_button=Button(text="inventory",command=inventory)
+inventory_button.pack(side=BOTTOM)
 root.title("The Quest")
 frame1 = Frame(root,padx=50, pady=50)
 frame1.pack(padx=50, pady=50)
-
 root.geometry("500x500")
 label = Label(frame1, text="Welcome to The Quest!!\nStory...\nIntro")
 label.pack()
