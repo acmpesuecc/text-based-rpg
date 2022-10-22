@@ -33,6 +33,9 @@ potion = 1  # increases hp by 30. Cost=300 gold
 ultra_potion = 1  # increases hp by 50. Cost=600 gold
 medium_potion = 1  # increases hp by 40. cost=450 gold
 which_potion = 0  # variable that lets you select the potion that you want to take.
+sword1 = 0
+sword2 = 0
+sword3 = 0
 
 
 def fight():
