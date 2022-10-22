@@ -1,6 +1,4 @@
-from tkinter import *
-import sys
-import time
+
 
 
 import random
@@ -1177,3 +1175,4 @@ welcome_button = Button(frame1, text='Next', command=lambda: get_room(),width=10
 welcome_button.pack()
 
 root.mainloop()
+
