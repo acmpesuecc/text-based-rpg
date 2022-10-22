@@ -27,6 +27,7 @@ Iron_Sword = False  # increases attack by 20
 Mythril_Sword = False  # increases attack by 30
 Orichalium_Sword = False  # increases attack by 40
 Iron_Armour = False  # decreases opp_att by 10
+Diamond_Armour = False
 Mythril_Armour = False  # decreases opp_att by 20
 Orichalium_Armour = False  # decereases opp_att by 30
 potion = 1  # increases hp by 30. Cost=300 gold
@@ -496,3 +497,6 @@ elif hp != 0:
 # next_button = Button(root, text='Next')
 #
 # root.mainloop()
+
+
+#...
