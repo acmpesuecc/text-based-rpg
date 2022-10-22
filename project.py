@@ -68,14 +68,14 @@ def fight():
             match int(which_potion):
                 case "1":
                     if potion > 0:
-                        hp += 30
+                        hp = min(hp+30,100)
                         potion -= 1
                     else: typing("You don't have a potion with you.\n")
                 case "2":
-                    if ultra_potion > 0: hp += 50
+                    if ultra_potion > 0: min(hp+50,100)
                     elif ultra_potion == 0: typing("You don't have a ultra potion.\n")
                 case "3":
-                    if medium_potion > 0: hp += 40
+                    if medium_potion > 0: min(hp+40,100)
                     elif not medium_potion: typing("You don't have a medium potion with you.\n")
                 case _: typing("Invalid input. You lose your chance.\n")
             typing(f"Your HP={hp}\n")
