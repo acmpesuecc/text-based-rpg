@@ -15,10 +15,10 @@ Orichalium_Sword = False  # increases attack by 40
 Iron_Armour = False  # decreases opp_att by 10
 Mythril_Armour = False  # decreases opp_att by 20
 Orichalium_Armour = False  # decreases opp_att by 30
-Jade_Armour = False # increases hp by 10
-Diamond_Armour = False #increases hp by 20
 BunSamosa_Armour= False #decreases opp_att by 50
 ACM_Armour= False #decreases opp_att by 60
+Jade_Armour = False # increases hp by 10
+Diamond_Armour = False #increases hp by 20
 potion = 1  # increases hp by 30. Cost=300 gold
 ultra_potion = 1  # increases hp by 50. Cost=600 gold
 medium_potion=1 #increases hp by 40, cost=450 gold
@@ -27,20 +27,22 @@ which_potion = 0  # variable that lets you select the potion that you want to ta
 
 def get_room():
     rav = 1
-    if (rav % 21 != 0):  # a loop to make sure that the bossmonster doesnt appear until upto 20 iterations in the game
+    if (rav%20!= 0):  # a loop to make sure that the bossmonster doesnt appear until upto 20 iterations in the game
         rav += 1
-        room = ( "shop", "treasure box","monster")
-        inside_room = random.choice(room)
-        #print(inside_room)
-        if inside_room == "shop":
+        #room = ("monster", "shop", "treasure box", "monster", "shop")
+        #inside_room = random.choice(room)
+        # print(inside_room)
+        prob_mons_shop=int(random.random()*10)
+        prob_treasure=int(random.random()*10)
+        # if inside_room == "shop":
+        frame1.destroy()
+        get_monster()
+        if rav%prob_mons_shop != 0:
             frame1.destroy()
             shop()
-        elif inside_room == "treasure box":
+        if rav%prob_treasure == 0:
             frame1.destroy()
             treasure_box()
-        elif inside_room == "monster":
-            frame1.destroy()
-            get_monster()
 
     else:
         rav += 1
@@ -375,8 +377,6 @@ def shop_armor():
     global Iron_Armour
     global Mythril_Armour
     global Orichalium_Armour
-    global Jade_Armour
-    global Diamond_Armour
     global BunSamosa_Armour
     global ACM_Armour
     frame_shop_1.destroy()
@@ -397,14 +397,8 @@ def shop_armor():
     elif Orichalium_Armour:
         L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Orichalium_Armour")
         L_Shop_armor_owned.pack()
-    elif Jade_Armour:
-        L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Jade_Armour")
-        L_Shop_armor_owned.pack()
-    elif Diamond_Armour:
-        L_Shop_armor_owned = Label(frame_shop_armor, text="Right now you have Diamond_Armour")
-        L_Shop_armor_owned.pack()    
-    L_Shop_armor_intro = Label(frame_shop_armor, text="We have 7 types of armors..\n"
-                                                      "Iron_Armour, Mythril_Armour, Orichalium_Armour, BunSamosa_Armour,ACM_Armour,Jade_Armour and Diamond_Armour\n"
+    L_Shop_armor_intro = Label(frame_shop_armor, text="We have 5 types of armors..\n"
+                                                      "Iron_Armour, Mythril_Armour, Orichalium_Armour, BunSamosa_Armour and ACM_Armour\n"
                                                       "Would you like to know more about them?\n")
     L_Shop_armor_intro.pack()
     B_Shop_armor_Y = Button(frame_shop_armor, text="Yes", command=lambda: shop_armor_yes())
@@ -682,6 +676,14 @@ def shop_armor_to_main():
     shop()
 
 
+
+
+
+def shop_armor_to_main():
+    frame_shop_armors_no.destroy()
+    shop()
+
+
 def shop_exit():
     # L_shop_exit = Label(frame_shop_1, text="Leaving shop...")
     # L_shop_exit.pack()
@@ -830,11 +832,6 @@ def monster_counterattack_1():
         hp = hp + 20
     elif Orichalium_Armour == True:
         hp = hp + 30
-    elif Jade_Armour == True:
-        hp = hp+10
-    elif Diamond_Armour == True:
-        hp = hp+20
-
     if hp < 0:
         hp = 0
         L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
@@ -842,6 +839,7 @@ def monster_counterattack_1():
         you_died()
     elif hp >100 : hp == 100 
     else:
+        if hp > 100 : hp = 100 
         L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
         L_monster_counterattack_result.pack()
         B_monster_attack_2 = Button(frame_monster_attack_1, text="Attack", command=lambda: monster_counter_to_attack())
@@ -960,7 +958,9 @@ def get_monster():
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop","Robert","Carlson")
+
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop","Robert","Carlson","golum","rhegar")
+
 
     monster = random.choice(monsters)
     # print(monster)
@@ -974,6 +974,26 @@ def get_monster():
         L_m1_intro.pack()
         fight_monster()
         # opp_att = random.randint(0, 10)
+    
+    if monster == "golum":
+        m = 13
+        # monster 13
+        # Attack in range of 10-20
+        L_m2_intro = Label(frame_monster_1, text="You have to face Golum\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m2_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(10, 20)
+
+    if monster == "rhegar":
+        m = 14
+        # monster 14
+        # Attack in range of 10-20
+        L_m2_intro = Label(frame_monster_1, text="You have to face Rhegar\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m2_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(10, 20)
 
     if monster == "Werewolf":
         m = 2
@@ -1205,11 +1225,62 @@ def get_bossmonster():
 
 
 
+def inventory():
+    global Iron_Sword 
+    global Mythril_Sword 
+    global Orichalium_Sword 
+    global Iron_Armour 
+    global Mythril_Armour
+    global Orichalium_Armour 
+    global potion 
+    global ultra_potion 
+    global medium_potion
+    global BunSamosa_Armour
+    global ACM_Armour 
+    newWindow = Toplevel(root)
+ 
+    newWindow.title("inventory")
+ 
+    newWindow.geometry("250x250")
+    Label(newWindow,text ="welcome to inventory").pack()
+
+    if(Iron_Sword):
+        iron_s_l=Label(newWindow,text ="iron sword\n").pack()
+    if(Mythril_Sword):
+        mythril_s_l=Label(newWindow,text ="mythril sword\n").pack()
+    if(Orichalium_Sword):
+        orichallium_s_l=Label(newWindow,text ="orichalium sword\n").pack()
+    if(Iron_Armour):
+        iron_a_l=Label(newWindow,text ="iron armour\n").pack()
+    if(Mythril_Armour):
+        mythril_a_l=Label(newWindow,text ="mythril armour\n").pack()
+    if(Orichalium_Armour):
+        orichalium_a_l=Label(newWindow,text ="orichalium armour\n").pack()
+    if(BunSamosa_Armour):
+        bun_a_l=Label(newWindow,text ="bunsamosa armour\n").pack()
+    if(ACM_Armour):
+        acm_a_l=Label(newWindow,text ="acm armour\n").pack()
+    if(potion!=0):
+        small_label=Label(newWindow,text =f"small potion x {potion}\n").pack()
+    else:
+        small_label=Label(newWindow,text ="").pack()
+    if(medium_potion!=0):
+        medium_label=Label(newWindow,text =f"medium potion x {medium_potion}\n").pack()
+    else:
+        medium_label=Label(newWindow,text ="").pack()
+    if(ultra_potion!=0):
+        ultra_label=Label(newWindow,text =f"ultra potion x {ultra_potion}\n").pack()
+    else:
+        ultra_label=Label(newWindow,text ="").pack()
+ 
+ 
+
 root = Tk()
+inventory_button=Button(text="inventory",command=inventory)
+inventory_button.pack(side=BOTTOM)
 root.title("The Quest")
 frame1 = Frame(root,padx=50, pady=50)
 frame1.pack(padx=50, pady=50)
-
 root.geometry("500x500")
 label = Label(frame1, text="Welcome to The Quest!!\nStory...\nIntro")
 label.pack()
