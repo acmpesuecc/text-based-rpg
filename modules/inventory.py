@@ -1,56 +1,41 @@
 from tkinter import *
 
+import modules.globalGameAttributes as globals
+
 def inventory():
-    global root
-    global Iron_Sword 
-    global Mythril_Sword 
-    global Orichalium_Sword 
-    global Iron_Armour 
-    global Mythril_Armour
-    global Orichalium_Armour 
-    global potion 
-    global ultra_potion 
-    global medium_potion
-    global BunSamosa_Armour
-    global ACM_Armour
-    global Silver_Armour
-    global Gold_Armour 
-    newWindow = Toplevel(root)
- 
+    newWindow = Toplevel(globals.root)
     newWindow.title("Your inventory")
- 
     newWindow.geometry("250x250")
     #Label(newWindow,text ="welcome to inventory").pack()
-
-    if(Iron_Sword):
+    if(globals.player.Iron_Sword):
         iron_s_l=Label(newWindow,text ="iron sword").pack()
-    if(Mythril_Sword):
+    if(globals.player.Mythril_Sword):
         mythril_s_l=Label(newWindow,text ="mythril sword").pack()
-    if(Orichalium_Sword):
+    if(globals.player.Orichalium_Sword):
         orichallium_s_l=Label(newWindow,text ="orichalium sword").pack()
-    if(Iron_Armour):
+    if(globals.player.Iron_Armour):
         iron_a_l=Label(newWindow,text ="iron armour").pack()
-    if(Mythril_Armour):
+    if(globals.player.Mythril_Armour):
         mythril_a_l=Label(newWindow,text ="mythril armour").pack()
-    if(Orichalium_Armour):
+    if(globals.player.Orichalium_Armour):
         orichalium_a_l=Label(newWindow,text ="orichalium armour").pack()
-    if(BunSamosa_Armour):
+    if(globals.player.BunSamosa_Armour):
         bun_a_l=Label(newWindow,text ="bunsamosa armour").pack()
-    if(ACM_Armour):
+    if(globals.player.ACM_Armour):
         acm_a_l=Label(newWindow,text ="acm armour").pack()
-    if(Silver_Armour):
+    if(globals.player.Silver_Armour):
         acm_a_l=Label(newWindow,text ="Silver armour").pack()
-    if(Gold_Armour):
+    if(globals.player.Gold_Armour):
         acm_a_l=Label(newWindow,text ="Gold armour").pack()
-    if(potion!=0):
-        small_label=Label(newWindow,text =f"small potion x {potion}").pack()
+    if(globals.player.potion!=0):
+        small_label=Label(newWindow,text =f"small potion x {globals.player.potion}").pack()
     else:
         small_label=Label(newWindow,text ="").pack()
-    if(medium_potion!=0):
-        medium_label=Label(newWindow,text =f"medium potion x {medium_potion}").pack()
+    if(globals.player.medium_potion!=0):
+        medium_label=Label(newWindow,text =f"medium potion x {globals.player.medium_potion}").pack()
     else:
         medium_label=Label(newWindow,text ="").pack()
-    if(ultra_potion!=0):
-        ultra_label=Label(newWindow,text =f"ultra potion x {ultra_potion}").pack()
+    if(globals.player.ultra_potion!=0):
+        ultra_label=Label(newWindow,text =f"ultra potion x {globals.player.ultra_potion}").pack()
     else:
         ultra_label=Label(newWindow,text ="").pack()

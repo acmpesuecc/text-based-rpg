@@ -1,16 +1,23 @@
 from tkinter import *
 
 import modules.globalGameAttributes as globals
-from modules.gameFunctions import *
+import modules.gameFunctions as gameFunctions
+import modules.rooms as rooms
+import modules.inventory as inventory
+import modules.monster as monster_functions
+import modules.potions as potions_functions
 
-from modules.player import *
-from modules.shop import *
-from modules.monster import *
-from modules.inventory import *
-
+import modules.player as player
 from modules.UIManager import *
 
 globals.init()
 
-uiManager = UIManager(globals.root, globals.frame1)
-uiManager.showMainWindow(inventory, get_room)
+globals.player = player.Player()
+globals.gameFunctions = gameFunctions
+globals.rooms = rooms
+globals.inventory = inventory
+globals.monster_functions = monster_functions
+globals.potions_functions = potions_functions
+
+globals.uiManager = UIManager()
+globals.uiManager.showMainWindow()
