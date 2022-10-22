@@ -727,6 +727,7 @@ def monster_counterattack_1():
         you_died()
     elif hp >100 : hp == 100 
     else:
+        if hp > 100 : hp = 100 
         L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
         L_monster_counterattack_result.pack()
         B_monster_attack_2 = Button(frame_monster_attack_1, text="Attack", command=lambda: monster_counter_to_attack())
@@ -845,7 +846,9 @@ def get_monster():
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
     L_monster_Wel.pack()
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop","Robert","Carlson")
+
+    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop","Robert","Carlson","golum","rhegar")
+
 
     monster = random.choice(monsters)
     # print(monster)
@@ -859,6 +862,26 @@ def get_monster():
         L_m1_intro.pack()
         fight_monster()
         # opp_att = random.randint(0, 10)
+    
+    if monster == "golum":
+        m = 13
+        # monster 13
+        # Attack in range of 10-20
+        L_m2_intro = Label(frame_monster_1, text="You have to face Golum\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m2_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(10, 20)
+
+    if monster == "rhegar":
+        m = 14
+        # monster 14
+        # Attack in range of 10-20
+        L_m2_intro = Label(frame_monster_1, text="You have to face Rhegar\n"
+                                                 "The match starts. You get the first chance\n")
+        L_m2_intro.pack()
+        fight_monster()
+        # opp_att = random.randint(10, 20)
 
     if monster == "Werewolf":
         m = 2
