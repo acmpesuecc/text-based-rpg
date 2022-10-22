@@ -27,18 +27,20 @@ def get_room():
     rav = 1
     if (rav%20!= 0):  # a loop to make sure that the bossmonster doesnt appear until upto 20 iterations in the game
         rav += 1
-        room = ("monster", "shop", "treasure box", "monster", "shop")
-        inside_room = random.choice(room)
+        #room = ("monster", "shop", "treasure box", "monster", "shop")
+        #inside_room = random.choice(room)
         # print(inside_room)
-        if inside_room == "shop":
+        prob_mons_shop=int(random.random()*10)
+        prob_treasure=int(random.random()*10)
+        # if inside_room == "shop":
+        frame1.destroy()
+        get_monster()
+        if rav%prob_mons_shop != 0:
             frame1.destroy()
             shop()
-        elif inside_room == "treasure box":
+        if rav%prob_treasure == 0:
             frame1.destroy()
             treasure_box()
-        elif inside_room == "monster":
-            frame1.destroy()
-            get_monster()
 
     else:
         rav += 1
