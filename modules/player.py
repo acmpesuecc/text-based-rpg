@@ -61,12 +61,12 @@ class Player:
             self.items.append({ "name": item.name, "amount": amount, "ref": item })
     
     def remove_item_from_inventory(self, itemname, amount):
-        for idx, x in enumerate(self.items, start=1):
+        for x in self.items:
             if x["name"] == itemname:
                 item_found = True
                 x["amount"] -= amount
                 if x["amount"] == 0:
-                    self.items.remove(idx)
+                    self.items.remove(x)
                 break
 
     def get_item_amount(self, itemname):

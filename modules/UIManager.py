@@ -187,7 +187,7 @@ class UIManager:
                                                                         "You have some time to rest.\n"
                                                                         "Would you like to use a potion?\n")
             L_monster_attack_result.pack()
-            B__monster_attack_result_yes = Button(globals.frame_monster_attack_1, text="Yes", command=lambda: globals.potions_functions.drink_potion())
+            B__monster_attack_result_yes = Button(globals.frame_monster_attack_1, text="Yes", command=lambda: globals.potions_functions.monster_potion_1())
             B__monster_attack_result_no = Button(globals.frame_monster_attack_1, text="No", command=lambda: self.monster_rest_no_to_room())
             B__monster_attack_result_yes.pack()
             B__monster_attack_result_no.pack()

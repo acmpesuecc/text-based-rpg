@@ -12,7 +12,8 @@ def shop_potion():
     pt_ultra = potions.Ultra_Potion()
 
     globals.frame_shop_1.destroy()
-    globals.frame_shop_potion = Frame(globals.root).pack()
+    globals.frame_shop_potion = Frame(globals.root)
+    globals.frame_shop_potion.pack()
     Label(globals.frame_shop_potion, text=f"You currently have {globals.player.get_item_amount(pt_small.name)} x {pt_small.name} and {globals.player.get_item_amount(pt_ultra.name)} x {pt_ultra.name} with you.\n"
                                                     f"We have 3 types of potion.\n"
                                                     f"{pt_small.name}, {pt_ultra.name} and {pt_medium.name}\n"
@@ -26,7 +27,8 @@ def shop_potion_no():
     pt_ultra = potions.Ultra_Potion()
 
     globals.frame_shop_potion.destroy()
-    globals.frame_shop_potion_no = Frame(globals.root).pack()
+    globals.frame_shop_potion_no = Frame(globals.root)
+    globals.frame_shop_potion_no.pack()
     Label(globals.frame_shop_potion_no, text="Okay then..\n"
                                             "Which potion would you like to buy?").pack()
     Button(globals.frame_shop_potion_no, text=pt_small.name, command=lambda: shop_potion_how_many(potions.Small_Potion)).pack()
@@ -39,7 +41,8 @@ def shop_potion_yes():
     pt_ultra = potions.Ultra_Potion()
 
     globals.frame_shop_potion.destroy()
-    globals.frame_shop_potion_yes = Frame(globals.root).pack()
+    globals.frame_shop_potion_yes = Frame(globals.root)
+    globals.frame_shop_potion_yes.pack()
     Label(globals.frame_shop_potion_yes, text=f"{pt_small.name} that costs {pt_small.gold_cost} gold will increase your HP by {pt_small.heal}\n"
                                             "And..\n"
                                             f"{pt_ultra.name} that costs {pt_ultra.gold_cost} gold will increase your HP by {pt_ultra.heal}\n"
@@ -55,7 +58,8 @@ def shop_potion_how_many(potion):
     pt = potion()
 
     globals.frame_shop_potion_no.destroy()
-    globals.frame_shop_potion_hm = Frame(globals.root).pack()
+    globals.frame_shop_potion_hm = Frame(globals.root)
+    globals.frame_shop_potion_hm.pack()
     Label(globals.frame_shop_potion_hm, text=f"How many {pt.name} would you like to buy?\n"
                                                 f"Cost={pt.gold_cost} gold\n"
                                                 f"You have {globals.player.gold} gold").pack()
@@ -68,7 +72,7 @@ def shop_potion_buy(potion):
         Label(globals.frame_shop_potion_hm, text="You don't have enough gold.\n"
                                                 "Let's shop for something else..\n").pack()
     else:
-        globals.player.add_to_inventory(potion, 1)
+        globals.player.add_item_to_inventory(potion, 1)
         globals.player.gold = globals.player.gold - potion.gold_cost
         Label(globals.frame_shop_potion_hm, text=(f"You now have {globals.player.gold} gold with you\n"
                                                     f"You now have {globals.player.get_item_amount(potion.name)} {potion.name} with you\n"
@@ -84,7 +88,8 @@ def shop_sword():
     orichalium_sword = weapons.Orichalium_Sword()
 
     globals.frame_shop_1.destroy()
-    globals.frame_shop_sword = Frame(globals.root).pack()
+    globals.frame_shop_sword = Frame(globals.root)
+    globals.frame_shop_sword.pack()
     if globals.player.weapon != "":
         Label(globals.frame_shop_sword, text=f"Right now, you have {globals.player.weapon.name}").pack()
 
@@ -100,7 +105,8 @@ def shop_sword_yes():
     orichalium_sword = weapons.Orichalium_Sword()
 
     globals.frame_shop_sword.destroy()
-    globals.frame_shop_sword_yes = Frame(globals.root).pack()
+    globals.frame_shop_sword_yes = Frame(globals.root)
+    globals.frame_shop_sword_yes.pack()
     Label(globals.frame_shop_sword_yes, text=f"{iron_sword.name} costs {iron_sword.gold_cost} gold and increases your attack by {iron_sword.attack}\n"
                                 f"{mythril_sword.name} costs {mythril_sword.gold_cost} gold and increases your attack by {mythril_sword.attack}\n"
                                 f"{orichalium_sword.name} costs {orichalium_sword.gold_cost} gold and increases your attack by {orichalium_sword.attack}\n").pack()
@@ -113,7 +119,8 @@ def shop_sword_yestono():
 
 def shop_sword_no():
     globals.frame_shop_sword.destroy()
-    globals.frame_shop_swords_no = Frame(globals.root).pack()
+    globals.frame_shop_swords_no = Frame(globals.root)
+    globals.frame_shop_swords_no.pack()
     Label(globals.frame_shop_swords_no,text="Which sword would you like to buy?\n").pack()
     Button(globals.frame_shop_swords_no, text="Iron Sword", command=lambda: shop_buy_sword(weapons.Iron_Sword)).pack()
     Button(globals.frame_shop_swords_no, text="Mythril Sword", command=lambda: shop_buy_sword(weapons.Mythril_Sword)).pack()
@@ -153,7 +160,8 @@ def shop_armor():
     silver_armour = armours.Silver_Armour()
 
     globals.frame_shop_1.destroy()
-    globals.frame_shop_armor = Frame(globals.root).pack()
+    globals.frame_shop_armor = Frame(globals.root)
+    globals.frame_shop_armor.pack()
 
     if globals.player.armour != "":
         Label(globals.frame_shop_armor, text=f"Right now, you have {globals.player.armour.name}").pack()
@@ -176,7 +184,8 @@ def shop_armor_yes():
     silver_armour = armours.Silver_Armour()
 
     globals.frame_shop_armor.destroy()
-    globals.frame_shop_armor_yes = Frame(globals.root).pack()
+    globals.frame_shop_armor_yes = Frame(globals.root)
+    globals.frame_shop_armor_yes.pack()
     Label(globals.frame_shop_armor_yes, text=f"{iron_armour.name} costs {iron_armour.gold_cost} gold and increases your attack by {iron_armour.attack}\n"
                                             f"{mythril_armour.name} costs {mythril_armour.gold_cost} gold and increases your attack by {mythril_armour.attack}\n"
                                             f"{orichalium_armour.name} costs {orichalium_armour.gold_cost} gold and increases your attack by {orichalium_armour.attack}\n"
@@ -207,7 +216,8 @@ def shop_armor_no():
     silver_armour = armours.Silver_Armour()
 
     globals.frame_shop_armor.destroy()
-    globals.frame_shop_armors_no = Frame(globals.root).pack()
+    globals.frame_shop_armors_no = Frame(globals.root)
+    globals.frame_shop_armors_no.pack() 
     Label(globals.frame_shop_armors_no,text="Which armor would you like to buy?\n").pack()
 
     Button(globals.frame_shop_armors_no, text=iron_armour.name, command=lambda: shop_armor_buy(armours.Iron_Armour)).pack()

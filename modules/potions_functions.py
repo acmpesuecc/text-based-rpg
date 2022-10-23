@@ -8,7 +8,8 @@ def monster_potion_1():
     pt_medium = potions.Medium_Potion()
     pt_ultra = potions.Ultra_Potion()
 
-    globals.frame_monster_potion_1 = Frame(globals.root).pack()
+    globals.frame_monster_potion_1 = Frame(globals.root)
+    globals.frame_monster_potion_1.pack()
     Label(globals.frame_monster_potion_1, text="We have three types of potions."
                                   f"{pt_small.name} that increase your HP by {pt_small.heal}\n"
                                   "And..\n"
