@@ -1,6 +1,6 @@
 import random
 import modules.globalGameAttributes as globals
-from modules.potions import *
+from modules.potions_functions import *
 
 def get_room():
     rav = 1

@@ -18,9 +18,7 @@ def init():
     global frame_shop_potion
     global frame_shop_potion_no
     global frame_shop_potion_yes
-    global frame_shop_potion_small
-    global frame_shop_potion_ultra
-    global frame_shop_potion_medium
+    global frame_shop_potion_hm
     global frame_shop_sword
     global frame_shop_sword_yes
     global frame_shop_swords_no
@@ -29,6 +27,7 @@ def init():
     global frame_shop_armors_no
     global m
     global opp_hp
+    global extra_hp
     global opp_attack
     global monster
     global monsters
@@ -62,9 +61,7 @@ def init():
     frame_shop_potion = ""
     frame_shop_potion_no = ""
     frame_shop_potion_yes = ""
-    frame_shop_potion_small = ""
-    frame_shop_potion_ultra = ""
-    frame_shop_potion_medium = ""
+    frame_shop_potion_hm = ""
     frame_shop_sword = ""
     frame_shop_sword_yes = ""
     frame_shop_swords_no = ""
@@ -72,7 +69,8 @@ def init():
     frame_shop_armor_yes = ""
     frame_shop_armors_no = ""
     m = 0
-    opp_hp = 0
+    opp_hp = 100 # monster's hp
+    extra_hp = 0  # extra opponent hp for boss round
     opp_attack = 0
     monster = ""
     monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop","Robert","Carlson","golum","rhegar")

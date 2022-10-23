@@ -5,7 +5,7 @@ import modules.globalGameAttributes as globals
 class UIManager:
     def __init__(self):
         pass
-
+    
     def showMainWindow(self):
         inventory_button=Button(text="inventory",command=globals.inventory.inventory)
         inventory_button.pack(side=BOTTOM)
