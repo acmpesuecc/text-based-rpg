@@ -8,3 +8,10 @@ EASY_MONSTERS = ("Goblin", "Werewolf", "Golum", "Rhegar", "Basilisk")
 MEDIUM_MONSTERS = ("Minotaur", "Orc", "Griffin", "Lola")
 HARD_MONSTERS = ("Dragon", "Cyclop", "Mike", "Dark Elf")
 EXPERT_MONSTERS = ("Dave", "Siri", "GrimReaper", "Dementor", "UrGhast", "Robert", "Carlson", "Severus", "Snape")
+
+SPECIAL_ABILITIES = {
+    "heal": "The monster will heal itself for 10% of its health every turn for 3 turns",
+    "poison": "The monster can poison you, causing damage over time for 2 turns",
+    "shield": "The monster has a shield that reduces incoming damage for 2 turns",
+    "double attack": "The monster can attack twice in one turn for 3 turns"
+}

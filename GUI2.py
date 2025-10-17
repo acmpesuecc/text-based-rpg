@@ -5,6 +5,10 @@ import time
 
 import random
 
+monster = ""  # to store the current monster
+turn = 1  # to keep track of turns in battle
+ability = "" # abikity of the monster
+reward = 0  # reward after defeating a monster
 gold = 1500  # used in store to buy items
 hp = 100  # user's hp
 opp_hp = 100  # monster's hp
@@ -492,7 +496,7 @@ def shop_armor_yes():
                                                             "BunSamosa_Armour costs 500 gold and increases your attack by 50\n"
                                                             "ACM_Armour costs 600 gold and increases your attack by 60\n"
                                                             "silver_Armour costs 550 gold and increases your attack by 65\n"
-                                                            "Gold_Armour costs 700 gold and increases your attack by 70\n"
+                                                            "Gold_Armour costs 700 gold and increases your attack by 70\n")
          
 
     L_Shop_armor_Y_info.pack()
@@ -1041,21 +1045,53 @@ def you_died():
 def quit():
     root.quit()
 
+def Special_ability_heal():
+    global monster
+    global ability
+    global opp_hp
+    global turn
+    if turn > 2:
+        return
+    else:
+        heal = opp_hp * 0.1
+        print(f"{monster} uses {ability} and heals {heal} HP")
+        opp_hp = opp_hp + heal
+
+
 
 def monster_counterattack_1():
+    global monster
+    global ability
+    global turn
     global hp
+    turn += 1
     L_monster_counterattack_1 = Label(
         frame_monster_attack_1, text=f"Now {monster} will take it's turn.\n")
     L_monster_counterattack_1.pack()
-    opp_attack = random.randint(((m - 1) * 10), (m * 10))
-    hp = hp - opp_attack
 
+    if ability == "heal":
+        Special_ability_heal()
+    opp_attack = random.randint(((m - 1) * 10), (m * 10)) 
+    if ability == "shield" and turn <= 2:
+        opp_attack = opp_attack // 2
+        print(f"{monster} uses {ability}, Its attack power is halfed this turn")
+    hp = hp - opp_attack
+    if ability == "double attack" and turn <= 3:
+        opp_attack2 = random.randint(((m - 1) * 10), (m * 10)) 
+        print(f"{monster} uses {ability}, It will attack twice this turn")
+        hp = hp - opp_attack2
+
+    if ability == "poison" and turn <= 3:
+        poison_damage = 5
+        hp = hp - poison_damage
     if Iron_Armour == True:
         hp = hp + 10
     elif Mythril_Armour == True:
         hp = hp + 20
     elif Orichalium_Armour == True:
         hp = hp + 30
+
+
 
     if hp < 0:
         hp = 0
@@ -1091,6 +1127,7 @@ def monster_counter_to_attack():
 
 
 def monster_attack_1():
+    global reward
     global opp_hp
     global frame_monster_attack_1
     frame_monster_1.destroy()
@@ -1117,7 +1154,9 @@ def monster_attack_1():
         monster_counterattack_1()
 
     if opp_hp <= 0:
+        turn = 1
         opp_hp = 0
+        gold = gold + reward
         L_monster_attack_result = Label(frame_monster_attack_1, text=f"{monster}'s HP={opp_hp}\n"
                                                                      f"Your HP = {hp}\n"
                                                                      f"you defeated {monster}\n"
@@ -1203,7 +1242,8 @@ def fight_monster():
     B_monster_potion_1.pack()
 
 
-def get_monster(int rav):
+def get_monster(rav):
+    global ability
     global m
     global opp_hp
     global monster
@@ -1220,49 +1260,91 @@ def get_monster(int rav):
     HARD_MONSTERS = ("Dragon", "Cyclop", "Mike", "Dark Elf")
     EXPERT_MONSTERS = ("Dave", "Siri", "GrimReaper", "Dementor", "UrGhast", "Robert", "Carlson", "Severus", "Snape")
 
+    EASY_REWARD = 20
+    MEDIUM_REWARD = 50
+    HARD_REWARD = 80
+    EXPERT_REWARD = 120
+
+    opp_hp = 100
+
     if 1 <= rav <= 5:
         #Rooms 1-5: 80% easy, 20% medium
         if random.random() < 0.8:
             monster = random.choice(EASY_MONSTERS)
             print(f"You face a {monster} (Level {rav} - EASY)")
+            reward = EASY_REWARD
+            ability = "heal"
         else:
             monster = random.choice(MEDIUM_MONSTERS)
             print(f"You face a {monster} (Level {rav} - MEDIUM)")
+            reward = MEDIUM_REWARD
+            opp_hp = 120
+            ability = "poison"
     elif 6 <= rav <= 10:
         #Rooms 6-10: 20% easy, 60% medium, 20% hard
         if random.random() < 0.2:
             monster = random.choice(EASY_MONSTERS)
             print(f"You face a {monster} (Level {rav} - EASY)")
+            reward = EASY_REWARD
+            ability = "heal"
         elif 0.2 <= random.random() <= 0.8:
             monster = random.choice(MEDIUM_MONSTERS)
             print(f"You face a {monster} (Level {rav} - MEDIUM)")
+            reward = MEDIUM_REWARD
+            opp_hp = 120
+            ability = "poison"
         else:
             monster = random.choice(HARD_MONSTERS)
             print(f"You face a {monster} (Level {rav} - HARD)")
+            reward = HARD_REWARD
+            opp_hp = 150
+            ability = "shield"
     elif 11 <= rav <= 15:
         #Rooms 11-15: 40% medium, 40% hard, 20% expert
         if random.random() < 0.4:
             monster = random.choice(MEDIUM_MONSTERS)
             print(f"You face a {monster} (Level {rav} - MEDIUM)")
+            reward = MEDIUM_REWARD
+            opp_hp = 120
+            ability = "poison"
         elif 0.4 <= random.random() <= 0.8:
             monster = random.choice(HARD_MONSTERS)
             print(f"You face a {monster} (Level {rav} - HARD)")
+            reward = HARD_REWARD
+            opp_hp = 150
+            ability = "shield"
         else:
             monster = random.choice(EXPERT_MONSTERS)
             print(f"You face a {monster} (Level {rav} - EXPERT)")
+            reward = EXPERT_REWARD
+            opp_hp = 200
+            ability = "double attack"
     elif 16 <= rav <= 19:
         #Rooms 16-19: 20% hard, 80% expert
         if random.random() < 0.2:
             monster = random.choice(HARD_MONSTERS)
             print(f"You face a {monster} (Level {rav} - HARD)")
+            reward = HARD_REWARD
+            opp_hp = 150
+            ability = "shield"
         else:
             monster = random.choice(EXPERT_MONSTERS)
             print(f"You face a {monster} (Level {rav} - EXPERT)")
+            reward = EXPERT_REWARD
+            opp_hp = 200
+            ability = "double attack"
     
-    if
+    SPECIAL_ABILITIES = {
+        "heal": "The monster will heal itself for 10% of its health every turn for 3 turns",
+        "poison": "The monster can poison you, causing damage over time for 2 turns",
+        "shield": "The monster has a shield that reduces incoming damage for 2 turns",
+        "double attack": "The monster can attack twice in one turn for 3 turns"
+    }
+
+    if ability == "poison":
+        print(f"{monster} uses {ability}, You will take 5 poison damage each turn for 3 turns")
 
     # print(monster)
-    opp_hp = 100
     if monster == "Goblin":
         m = 1
         # monster 1
