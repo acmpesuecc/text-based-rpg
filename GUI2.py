@@ -1522,7 +1522,11 @@ def inventory():
     consum_frame = LabelFrame(newWindow, text="Consumables", font=("Arial", 12, "bold"), padx=10, pady=10)
     consum_frame.pack(fill="x", padx=10, pady=5)
     # Put a placeholder label in it for now
-    Label(consum_frame, text="Potions will go here...").pack()
+    # --- CONSUMABLES SECTION ---
+    # We use .pack(anchor="w") to make all text align to the left ("west")
+    Label(consum_frame, text=f"Small Potion x{potion} (+30 HP each)", font=("Arial", 10), fg="blue").pack(anchor="w")
+    Label(consum_frame, text=f"Medium Potion x{medium_potion} (+40 HP each)", font=("Arial", 10), fg="blue").pack(anchor="w")
+    Label(consum_frame, text=f"Ultra Potion x{ultra_potion} (+50 HP each)", font=("Arial", 10), fg="blue").pack(anchor="w")
     
     # --- 3. ADD THE CLOSE BUTTON ---
     Button(newWindow, text="Close", command=newWindow.destroy, font=("Arial", 10, "bold")).pack(side=BOTTOM, pady=10)
