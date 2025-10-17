@@ -1,4 +1,5 @@
-Required Dependencies: tkinter
-Required Inbuilt Libraries: time, sys, random
-Optional Dependencies for the future: dbm, shutil
-Python Version Required: 3.13.7
+#Required Dependencies
+tkinter==8.6
+#Future Dependencies Required : dbm, shutil (included as base python standard libraries)
+#Python Version
+python==3.13.7
