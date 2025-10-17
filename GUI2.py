@@ -558,8 +558,7 @@ def shop_armor_armor1():
     if Iron_Armour == False:
         if gold > 200:
             gold = gold - 200
-            L_shop_armors_armor1 = Label(frame_shop_armors_no, text="You now have Iron_Armour\n"
-                                                                    f"You now have {gold} gold")
+            L_shop_armors_armor1 = Label(frame_shop_armors_no, text="You now have Iron_Armour\n"f"You now have {gold} gold")
             L_shop_armors_armor1.pack()
             Iron_Armour = True
             Mythril_Armour = False

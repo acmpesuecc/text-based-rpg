@@ -1,0 +1,5 @@
+#Required Dependencies
+tkinter==8.6
+#Future Dependencies Required : dbm, shutil (included as base python standard libraries)
+#Python Version
+python==3.13.7
