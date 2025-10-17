@@ -1544,7 +1544,21 @@ def inventory():
     equip_frame = LabelFrame(newWindow, text="Equipment", font=("Arial", 12, "bold"), padx=10, pady=10)
     equip_frame.pack(fill="x", padx=10, pady=5)
     # Put a placeholder label in it for now
-    Label(equip_frame, text="Equipment will go here...").pack()
+    equipped_sword_name = "Iron Sword"
+    equipped_sword_stat = "+20 Damage"
+    equipped_armor_name = "Mythril Armour"
+    equipped_armor_stat = "+20 Def"
+    # --- End of Placeholders ---
+
+    sword_text = "Sword: None equipped"
+    if equipped_sword_name: # Checks if the string is not empty
+        sword_text = f"Sword: {equipped_sword_name} ({equipped_sword_stat})"
+    Label(equip_frame, text=sword_text, font=("Arial", 10)).pack(anchor="w")
+
+    armor_text = "Armour: None equipped"
+    if equipped_armor_name:
+        armor_text = f"Armour: {equipped_armor_name} ({equipped_armor_stat})"
+    Label(equip_frame, text=armor_text, font=("Arial", 10)).pack(anchor="w")
 
     consum_frame = LabelFrame(newWindow, text="Consumables", font=("Arial", 12, "bold"), padx=10, pady=10)
     consum_frame.pack(fill="x", padx=10, pady=5)
