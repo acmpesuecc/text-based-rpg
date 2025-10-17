@@ -28,7 +28,10 @@ ultra_potion = 1  # increases hp by 50. Cost=600 gold
 medium_potion = 1  # increases hp by 40, cost=450 gold
 # variable that lets you select the potion that you want to take.
 which_potion = 0
-
+monsters_defeated = 0
+rooms_cleared = 0
+gold_earned = 0
+monsterCountAtGameEnd = 40
 
 def get_room():
     rav = 1
@@ -60,6 +63,8 @@ def get_room():
 
 def treasure_box():
     global gold
+    global rooms_cleared
+    global gold_earned
     global frame_tb
     frame_tb = Frame(root)
     frame_tb.pack()
@@ -68,6 +73,8 @@ def treasure_box():
 
     prize = random.randint(2, 7)
     gold = gold + (prize * 100)
+    gold += 1
+    rooms_cleared += 1
 
     L_TB_gold = Label(frame_tb, text=f"You now have {gold} gold\n")
     L_TB_gold.pack()
@@ -1028,17 +1035,27 @@ def monster_potion_1_medium():
 def you_died():
     frame_you_died = Frame(root)
     frame_you_died.pack()
-    L_You_Died = Label(frame_monster_attack_1, text=f"You got killed by {monster}.\n"
+    '''L_You_Died = Label(frame_monster_attack_1, text=f"You got killed by {monster}.\n"
                                                     f"You couldn't reach the final treasure.\n"
-                                                    f"Better luck next time.")
+                                                    f"Better luck next time.")'''
+    L_You_Died = Label(frame_monster_attack_1, text=f"GAME OVER!\n"
+                                                    f"Cause of death: {monster}.\n"
+                                                    f"Monsters Defeated: {monsters_defeated} \n"
+                                                    f"Gold Collected: {gold} \n")
     L_You_Died.pack()
+
+    B_Play_Again = Button(frame_monster_attack_1, text="Play Again", command=lambda: restart_game())
     B_You_died = Button(frame_monster_attack_1,
                         text="Quit", command=lambda: quit())
     B_You_died.pack()
+    B_Play_Again.pack()
 
 
-def quit():
-    root.quit()
+def restart_game():
+    
+
+    frame_monster_attack_1.destroy()
+    get_room()
 
 
 def monster_counterattack_1():
@@ -1091,6 +1108,7 @@ def monster_counter_to_attack():
 
 def monster_attack_1():
     global opp_hp
+    global monsters_defeated
     global frame_monster_attack_1
     frame_monster_1.destroy()
     frame_monster_attack_1 = Frame(root)
@@ -1116,6 +1134,7 @@ def monster_attack_1():
         monster_counterattack_1()
 
     if opp_hp <= 0:
+        monsters_defeated += 1
         opp_hp = 0
         L_monster_attack_result = Label(frame_monster_attack_1, text=f"{monster}'s HP={opp_hp}\n"
                                                                      f"Your HP = {hp}\n"
@@ -1129,6 +1148,19 @@ def monster_attack_1():
             frame_monster_attack_1, text="No", command=lambda: monster_rest_no_to_room())
         B__monster_attack_result_yes.pack()
         B__monster_attack_result_no.pack()
+
+        if(monsters_defeated == monsterCountAtGameEnd):
+            L_monster_attack_result_final = Label(frame_monster_attack_1, text=f"VICTORY\n"
+                                                                     f"Rooms cleared: {rooms_cleared} \n"
+                                                                     f"Monsters Defeated: {monsters_defeated} \n"
+                                                                     f"Final Gold: {gold} \n"
+                                                                     f"Remaining HP: {hp} \n")
+            L_monster_attack_result_final.pack()
+            B_Play_Again = Button(frame_monster_attack_1, text="Play Again", command=lambda: restart_game())
+            B_You_died = Button(frame_monster_attack_1,
+                        text="Quit", command=lambda: quit())
+            B_You_died.pack()
+            B_Play_Again.pack()
 
 
 def monster_rest_no_to_room():

@@ -101,7 +101,9 @@ def fight():
             elif Mythril_Armour: hp += 20
             elif Iron_Armour: hp += 10
             print(f"Your HP={hp}\n") 
-
+        #----
+        if hp == 0:
+            typing("You have died!")
 
 def potion_time():
     global hp
