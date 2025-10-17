@@ -28,12 +28,12 @@ ultra_potion = 1  # increases hp by 50. Cost=600 gold
 medium_potion = 1  # increases hp by 40, cost=450 gold
 # variable that lets you select the potion that you want to take.
 which_potion = 0
-
+rav = 0  # the current room number
 
 def get_room():
-    rav = 1
+    global rav
+    rav += 1
     if (rav % 20 != 0):  # a loop to make sure that the bossmonster doesnt appear until upto 20 iterations in the game
-        rav += 1
         #room = ("monster", "shop", "treasure box", "monster", "shop")
         #inside_room = random.choice(room)
         # print(inside_room)
@@ -45,7 +45,7 @@ def get_room():
             prob_mons_shop = random.random()
             if prob_mons_shop > 0.5:
                 frame1.destroy()
-                get_monster()
+                get_monster(rav)
             else:
                 frame1.destroy()
                 shop()
@@ -1203,7 +1203,7 @@ def fight_monster():
     B_monster_potion_1.pack()
 
 
-def get_monster():
+def get_monster(int rav):
     global m
     global opp_hp
     global monster
@@ -1215,10 +1215,52 @@ def get_monster():
 
 
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop","Robert","Carlson","golum","rhegar")
+    EASY_MONSTERS = ("Goblin", "Werewolf", "Golum", "Rhegar", "Basilisk")
+    MEDIUM_MONSTERS = ("Minotaur", "Orc", "Griffin", "Lola")
+    HARD_MONSTERS = ("Dragon", "Cyclop", "Mike", "Dark Elf")
+    EXPERT_MONSTERS = ("Dave", "Siri", "GrimReaper", "Dementor", "UrGhast", "Robert", "Carlson", "Severus", "Snape")
 
+    if 1 <= rav <= 5:
+        #Rooms 1-5: 80% easy, 20% medium
+        if random.random() < 0.8:
+            monster = random.choice(EASY_MONSTERS)
+            print(f"You face a {monster} (Level {rav} - EASY)")
+        else:
+            monster = random.choice(MEDIUM_MONSTERS)
+            print(f"You face a {monster} (Level {rav} - MEDIUM)")
+    elif 6 <= rav <= 10:
+        #Rooms 6-10: 20% easy, 60% medium, 20% hard
+        if random.random() < 0.2:
+            monster = random.choice(EASY_MONSTERS)
+            print(f"You face a {monster} (Level {rav} - EASY)")
+        elif 0.2 <= random.random() <= 0.8:
+            monster = random.choice(MEDIUM_MONSTERS)
+            print(f"You face a {monster} (Level {rav} - MEDIUM)")
+        else:
+            monster = random.choice(HARD_MONSTERS)
+            print(f"You face a {monster} (Level {rav} - HARD)")
+    elif 11 <= rav <= 15:
+        #Rooms 11-15: 40% medium, 40% hard, 20% expert
+        if random.random() < 0.4:
+            monster = random.choice(MEDIUM_MONSTERS)
+            print(f"You face a {monster} (Level {rav} - MEDIUM)")
+        elif 0.4 <= random.random() <= 0.8:
+            monster = random.choice(HARD_MONSTERS)
+            print(f"You face a {monster} (Level {rav} - HARD)")
+        else:
+            monster = random.choice(EXPERT_MONSTERS)
+            print(f"You face a {monster} (Level {rav} - EXPERT)")
+    elif 16 <= rav <= 19:
+        #Rooms 16-19: 20% hard, 80% expert
+        if random.random() < 0.2:
+            monster = random.choice(HARD_MONSTERS)
+            print(f"You face a {monster} (Level {rav} - HARD)")
+        else:
+            monster = random.choice(EXPERT_MONSTERS)
+            print(f"You face a {monster} (Level {rav} - EXPERT)")
+    
+    if
 
-    monster = random.choice(monsters)
     # print(monster)
     opp_hp = 100
     if monster == "Goblin":
@@ -1494,7 +1536,7 @@ def inventory():
     global ACM_Armour
     global Silver_Armour
     global Gold_Armour 
-    newWindow = Toplevel(root)
+    newWindow = Toplevel(root)  
  
     newWindow.title("inventory")
  
