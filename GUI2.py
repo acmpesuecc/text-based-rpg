@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 import sys
 import time
 
@@ -1477,63 +1478,54 @@ def get_bossmonster():
         # opp_att = random.randint(10, 20)
     b = Button(frame1, text="Quit", command=quit_screen)
     b.pack()
-
-
-
+Iron_Sword = True
+Mythril_Sword = False
+Orichalium_Sword = False
+Iron_Armour = True
+Mythril_Armour = False
+Orichalium_Armour = False
+BunSamosa_Armour = False
+ACM_Armour = False
+Silver_Armour = False
+Gold_Armour = False
+potion = 3
+medium_potion = 1
+ultra_potion = 0
 
 def inventory():
-    global Iron_Sword 
-    global Mythril_Sword 
-    global Orichalium_Sword 
-    global Iron_Armour 
-    global Mythril_Armour
-    global Orichalium_Armour 
     global potion 
     global ultra_potion 
     global medium_potion
-    global BunSamosa_Armour
-    global ACM_Armour
-    global Silver_Armour
-    global Gold_Armour 
-    newWindow = Toplevel(root)
- 
-    newWindow.title("inventory")
- 
-    newWindow.geometry("250x250")
-    Label(newWindow,text ="welcome to inventory").pack()
 
-    if(Iron_Sword):
-        iron_s_l=Label(newWindow,text ="iron sword\n").pack()
-    if(Mythril_Sword):
-        mythril_s_l=Label(newWindow,text ="mythril sword\n").pack()
-    if(Orichalium_Sword):
-        orichallium_s_l=Label(newWindow,text ="orichalium sword\n").pack()
-    if(Iron_Armour):
-        iron_a_l=Label(newWindow,text ="iron armour\n").pack()
-    if(Mythril_Armour):
-        mythril_a_l=Label(newWindow,text ="mythril armour\n").pack()
-    if(Orichalium_Armour):
-        orichalium_a_l=Label(newWindow,text ="orichalium armour\n").pack()
-    if(BunSamosa_Armour):
-        bun_a_l=Label(newWindow,text ="bunsamosa armour\n").pack()
-    if(ACM_Armour):
-        acm_a_l=Label(newWindow,text ="acm armour\n").pack()
-    if(Silver_Armour):
-        acm_a_l=Label(newWindow,text ="Silver armour\n").pack()
-    if(Gold_Armour):
-        acm_a_l=Label(newWindow,text ="Gold armour\n").pack()
-    if(potion!=0):
-        small_label=Label(newWindow,text =f"small potion x {potion}\n").pack()
-    else:
-        small_label=Label(newWindow,text ="").pack()
-    if(medium_potion!=0):
-        medium_label=Label(newWindow,text =f"medium potion x {medium_potion}\n").pack()
-    else:
-        medium_label=Label(newWindow,text ="").pack()
-    if(ultra_potion!=0):
-        ultra_label=Label(newWindow,text =f"ultra potion x {ultra_potion}\n").pack()
-    else:
-        ultra_label=Label(newWindow,text ="").pack()
+    # --- 1. CREATE THE NEW WINDOW ---
+    newWindow = Toplevel(root)
+    newWindow.title("Inventory")
+    newWindow.geometry("400x520") # New, bigger size
+    newWindow.resizable(False, False)
+
+    # Main title
+    Label(newWindow, text="INVENTORY", font=("Arial", 18, "bold")).pack(pady=10)
+
+    # --- 2. CREATE THE FRAMES (SKELETON) ---
+    
+    # LabelFrame creates a box with a title
+    stats_frame = LabelFrame(newWindow, text="Player Stats", font=("Arial", 12, "bold"), padx=10, pady=10)
+    stats_frame.pack(fill="x", padx=10, pady=5)
+    # Put a placeholder label in it for now
+    Label(stats_frame, text="Stats will go here...").pack()
+
+    equip_frame = LabelFrame(newWindow, text="Equipment", font=("Arial", 12, "bold"), padx=10, pady=10)
+    equip_frame.pack(fill="x", padx=10, pady=5)
+    # Put a placeholder label in it for now
+    Label(equip_frame, text="Equipment will go here...").pack()
+
+    consum_frame = LabelFrame(newWindow, text="Consumables", font=("Arial", 12, "bold"), padx=10, pady=10)
+    consum_frame.pack(fill="x", padx=10, pady=5)
+    # Put a placeholder label in it for now
+    Label(consum_frame, text="Potions will go here...").pack()
+    
+    # --- 3. ADD THE CLOSE BUTTON ---
+    Button(newWindow, text="Close", command=newWindow.destroy, font=("Arial", 10, "bold")).pack(side=BOTTOM, pady=10)
  
  
 
