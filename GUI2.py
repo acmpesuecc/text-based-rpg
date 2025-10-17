@@ -1512,7 +1512,34 @@ def inventory():
     stats_frame = LabelFrame(newWindow, text="Player Stats", font=("Arial", 12, "bold"), padx=10, pady=10)
     stats_frame.pack(fill="x", padx=10, pady=5)
     # Put a placeholder label in it for now
-    Label(stats_frame, text="Stats will go here...").pack()
+   # --- Placeholder Stats ---
+    # You MUST replace these with your REAL game variables
+    player_hp = 60
+    player_max_hp = 100
+    player_gold = 1450
+    rooms_cleared = 12
+    monsters_defeated = 41
+    # --- End of Placeholders ---
+
+    hp_percent = 0
+    if player_max_hp > 0: # Avoid division by zero
+        hp_percent = (player_hp / player_max_hp) * 100
+        
+    hp_text = f"HP: {player_hp} / {player_max_hp} ({hp_percent:.0f}%)"
+    
+    Label(stats_frame, text=hp_text, fg="green", font=("Arial", 10, "bold")).pack(anchor="w")
+
+    # This is the HP progress bar
+    style = ttk.Style()
+    style.configure("green.Horizontal.TProgressbar", background='green')
+    hp_bar = ttk.Progressbar(stats_frame, orient=HORIZONTAL, length=100, mode='determinate', value=hp_percent, style="green.Horizontal.TProgressbar")
+    hp_bar.pack(anchor="w", fill="x", pady=5)
+    
+    gold_text = f"Gold: 🪙 {player_gold} Gold"
+    Label(stats_frame, text=gold_text, fg="#DAA520", font=("Arial", 10, "bold")).pack(anchor="w")
+
+    Label(stats_frame, text=f"Rooms Cleared: {rooms_cleared}", font=("Arial", 10)).pack(anchor="w")
+    Label(stats_frame, text=f"Monsters Defeated: {monsters_defeated}", font=("Arial", 10)).pack(anchor="w")
 
     equip_frame = LabelFrame(newWindow, text="Equipment", font=("Arial", 12, "bold"), padx=10, pady=10)
     equip_frame.pack(fill="x", padx=10, pady=5)
