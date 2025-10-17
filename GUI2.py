@@ -79,7 +79,7 @@ def treasure_box():
     L_TB_gold = Label(frame_tb, text=f"You now have {gold} gold\n")
     L_TB_gold.pack()
 
-    B_TB = Button(frame_tb, text="Next", command=lambda: treasure_box_exit())
+    B_TB = Button(frame_tb, text="Next", command=lambda: treasure_box_exit(),bg="#67D5DD", fg="black")
     B_TB .pack()
 
 
@@ -138,7 +138,7 @@ def shop_potion_yes():
                                                           "Medium potion that costs 450 gold will increase your HP by 40")
     L_Shop_Potion_Yes.pack()
     B_Shop_Potion_Yes = Button(
-        frame_shop_potion_yes, text="Next", command=lambda: shop_potion_yestono())
+        frame_shop_potion_yes, text="Next", command=lambda: shop_potion_yestono(),bg="#67D5DD", fg="black")
     B_Shop_Potion_Yes.pack()
 
 
@@ -324,7 +324,7 @@ def shop_sword_yes():
     L_Shop_Sword_Y_info.pack()
 
     B_Shop_Sword_Yes = Button(
-        frame_shop_sword_yes, text="Next", command=lambda: shop_sword_yestono())
+        frame_shop_sword_yes, text="Next", command=lambda: shop_sword_yestono(),bg="#67D5DD", fg="black")
     B_Shop_Sword_Yes.pack()
 
 
@@ -505,7 +505,7 @@ def shop_armor_yes():
     L_Shop_armor_Y_info.pack()
 
     B_Shop_armor_Yes = Button(
-        frame_shop_armor_yes, text="Next", command=lambda: shop_armor_yestono())
+        frame_shop_armor_yes, text="Next", command=lambda: shop_armor_yestono(),bg="#67D5DD", fg="black")
     B_Shop_armor_Yes.pack()
 
 
@@ -925,15 +925,15 @@ def shop():
     # store1 = input("1=Potion, 2=Sword, 3=Armor, 4=Exit Store\n")
     B_Shop_Potion = Button(frame_shop_1, text="Potion",
                            command=lambda: shop_Potion())
-    B_Shop_Potion.pack()
+    B_Shop_Potion.pack(pady=3)
     B_Shop_Sword = Button(frame_shop_1, text="Sword",
                           command=lambda: shop_sword())
-    B_Shop_Sword.pack()
+    B_Shop_Sword.pack(pady=3)
     B_Shop_Armor = Button(frame_shop_1, text="Armor",
                           command=lambda: shop_armor())
-    B_Shop_Armor.pack()
+    B_Shop_Armor.pack(pady=3)
     B_Shop_ExitStore = Button(
-        frame_shop_1, text="Exit Store", command=lambda: shop_exit())
+        frame_shop_1, text="Exit Store", command=lambda: shop_exit(), bg="darkred", fg="white")
     B_Shop_ExitStore.pack()
     # if invalid input..
 
@@ -968,12 +968,12 @@ def monster_potion_1():
         frame_monster_potion_1, text="Ultra Potion", command=lambda: monster_potion_1_ultra())
     B_monster_potion_medium = Button(
         frame_monster_potion_1, text="Medium Potion", command=lambda: monster_potion_1_medium())
-    B_monster_potion_medium.pack()
-    B_monster_potion_small.pack()
-    B_monster_potion_ultra.pack()
+    B_monster_potion_medium.pack(pady=4)
+    B_monster_potion_small.pack(pady=4)
+    B_monster_potion_ultra.pack(pady=4)
     B_monster_potion_back = Button(
-        frame_monster_potion_1, text="back to battle", command=lambda: monster_potion_to_attack())
-    B_monster_potion_back.pack()
+        frame_monster_potion_1, text="back to battle", command=lambda: monster_potion_to_attack(), bg="darkorange", fg="black")
+    B_monster_potion_back.pack(pady=8)
 
 
 def monster_potion_to_attack():
@@ -1041,13 +1041,13 @@ def you_died():
     L_You_Died = Label(frame_monster_attack_1, text=f"GAME OVER!\n"
                                                     f"Cause of death: {monster}.\n"
                                                     f"Monsters Defeated: {monsters_defeated} \n"
-                                                    f"Gold Collected: {gold} \n")
-    L_You_Died.pack()
+                                                    f"Gold Collected: {gold} \n", relief = "solid", borderwidth = 2, font=("Helvetica", 12), padx=10, pady=10)
+    L_You_Died.pack(padx=10, pady=10)
 
-    B_Play_Again = Button(frame_monster_attack_1, text="Play Again", command=lambda: restart_game())
+    B_Play_Again = Button(frame_monster_attack_1, text="Play Again", command=lambda: restart_game(), bg="#66F57D", fg="black")
     B_You_died = Button(frame_monster_attack_1,
-                        text="Quit", command=lambda: quit())
-    B_You_died.pack()
+                        text="Quit", command=lambda: quit(), bg="red", fg="black")
+    B_You_died.pack(padx=15, pady=15)
     B_Play_Again.pack()
 
 
@@ -1076,7 +1076,7 @@ def monster_counterattack_1():
     if hp < 0:
         hp = 0
         L_monster_counterattack_result = Label(
-            frame_monster_attack_1, text=f"Your HP={hp}\n")
+            frame_monster_attack_1, text=f"Your HP={hp}\n", fg="#537A5A")
         L_monster_counterattack_result.pack()
         you_died()
 
@@ -1086,15 +1086,15 @@ def monster_counterattack_1():
     else:
         if hp >100 : hp = 100 
 
-        L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n")
+        L_monster_counterattack_result = Label(frame_monster_attack_1, text=f"Your HP={hp}\n", fg="#537A5A")
 
         L_monster_counterattack_result.pack()
         B_monster_attack_2 = Button(
-            frame_monster_attack_1, text="Attack", command=lambda: monster_counter_to_attack())
+            frame_monster_attack_1, text="Attack", command=lambda: monster_counter_to_attack(), bg="#FAAC63", fg="black")
         B_monster_potion_2 = Button(
-            frame_monster_attack_1, text="Potion", command=lambda: monster_counter_to_potion())
-        B_monster_attack_2.pack()
-        B_monster_potion_2.pack()
+            frame_monster_attack_1, text="Potion", command=lambda: monster_counter_to_potion(), bg="#FAE564", fg="black")
+        B_monster_attack_2.pack(pady=6)
+        B_monster_potion_2.pack(pady=6)
 
 def monster_counter_to_potion():
     frame_monster_attack_1.destroy()
@@ -1114,7 +1114,7 @@ def monster_attack_1():
     frame_monster_attack_1 = Frame(root)
     frame_monster_attack_1.pack()
     L_monster_attack_1 = Label(
-        frame_monster_attack_1, text="You chose to attack.\n")
+        frame_monster_attack_1, text="You chose to attack.\n", bg="black", fg="white")
     L_monster_attack_1.pack()
     userattack = random.randint(40, 70)
     opp_hp = opp_hp - userattack
@@ -1137,7 +1137,7 @@ def monster_attack_1():
         monsters_defeated += 1
         opp_hp = 0
         L_monster_attack_result = Label(frame_monster_attack_1, text=f"{monster}'s HP={opp_hp}\n"
-                                                                     f"Your HP = {hp}\n"
+                                                                     f"Your HP = {hp}\n", fg="#537A5A"
                                                                      f"you defeated {monster}\n"
                                                                      "You have some time to rest.\n"
                                                                      "Would you like to use a potion?\n")
@@ -1200,7 +1200,7 @@ def drink_potion():
     B_monster_potion_small.pack()
     B_monster_potion_ultra.pack()
     B_next_room = Button(frame_monster_potion_1, text="Next",
-                         command=lambda: monster_rest_to_room())
+                         command=lambda: monster_rest_to_room(), bg="#67D5DD", fg="black")
     B_next_room.pack()
 
 
@@ -1227,9 +1227,9 @@ def fight_monster():
                                                       "Would you like to attack or use potion??\n")
     L_monster_intro.pack()
     B_monster_attack_1 = Button(
-        frame_fight_monster, text="Attack", command=lambda: fight_monster_to_monster_attack())
+        frame_fight_monster, text="Attack", command=lambda: fight_monster_to_monster_attack(), bg="#FAAC63", fg="black")
     B_monster_potion_1 = Button(
-        frame_fight_monster, text="Potion", command=lambda: fight_monster_to_monster_potion())
+        frame_fight_monster, text="Potion", command=lambda: fight_monster_to_monster_potion(), bg="#FAE564", fg="black")
     B_monster_attack_1.pack()
     B_monster_potion_1.pack()
 
@@ -1241,7 +1241,7 @@ def get_monster():
     global frame_monster_1
     frame_monster_1 = Frame(root)
     frame_monster_1.pack()
-    L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.")
+    L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.", font=("Helvetica", 16))
     L_monster_Wel.pack()
 
 
@@ -1569,8 +1569,8 @@ def inventory():
 
 
 root = Tk()
-inventory_button=Button(text="inventory",command=inventory)
-inventory_button.pack(side=BOTTOM)
+inventory_button=Button(text="inventory",command=inventory, bg="#FA9D92", fg="black")
+inventory_button.pack(side=BOTTOM, pady=50)
 root.title("The Quest")
 frame1 = Frame(root, padx=50, pady=50)
 frame1.pack(padx=50, pady=50)
@@ -1578,7 +1578,7 @@ root.geometry("500x500")
 label = Label(frame1, text="Welcome to The Quest!!\nStory...\nIntro")
 label.pack()
 
-welcome_button = Button(frame1, text='Next', command=lambda: get_room())
+welcome_button = Button(frame1, text='Next', command=lambda: get_room(),bg="#67D5DD", fg="black")
 welcome_button.pack()
 
 root.mainloop()
