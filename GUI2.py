@@ -719,8 +719,8 @@ def shop_armor_armor5():
             Diamond_Armour = True
             ACM_Armour = False
             BunSamosa_Armour = False
-             Gold_Armour=False
-            Silver_Armour =False
+            Gold_Armour = False
+            Silver_Armour = False
 
         else:
             L_shop_armors_armor5 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -756,8 +756,8 @@ def shop_armor_armor6():
             Diamond_Armour = False
             ACM_Armour = True
             BunSamosa_Armour = False
-             Gold_Armour=False
-            Silver_Armour =False
+            Gold_Armour = False
+            Silver_Armour = False
 
         else:
             L_shop_armors_armor6 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -791,8 +791,8 @@ def shop_armor_armor7():
             Diamond_Armour = False
             ACM_Armour = False
             BunSamosa_Armour = True
-             Gold_Armour=False
-            Silver_Armour =False
+            Gold_Armour = False
+            Silver_Armour = False
 
         else:
             L_shop_armors_armor7 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -826,8 +826,8 @@ def shop_armor_armor8():
             Diamond_Armour = False
             ACM_Armour = False
             BunSamosa_Armour = False
-             Gold_Armour=False
-            Silver_Armour =True
+            Gold_Armour = False
+            Silver_Armour = True
 
         else:
             L_shop_armors_armor8 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
@@ -861,8 +861,8 @@ def shop_armor_armor9():
             Diamond_Armour = False
             ACM_Armour = False
             BunSamosa_Armour = False
-             Gold_Armour=True
-            Silver_Armour =False
+            Gold_Armour = True
+            Silver_Armour = False
 
         else:
             L_shop_armors_armor9 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
