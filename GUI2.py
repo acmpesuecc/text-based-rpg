@@ -491,8 +491,9 @@ def shop_armor_yes():
                                                             "Diamond_Armour costs 350 gold and increases your hp by 20\n"
                                                             "BunSamosa_Armour costs 500 gold and increases your attack by 50\n"
                                                             "ACM_Armour costs 600 gold and increases your attack by 60\n"
-                                                            "silver_Armour costs 550 gold and increases your attack by 65\n"
+                                                            "Silver_Armour costs 550 gold and increases your attack by 65\n"
                                                             "Gold_Armour costs 700 gold and increases your attack by 70\n"
+                                                            )
          
 
     L_Shop_armor_Y_info.pack()
@@ -566,8 +567,8 @@ def shop_armor_armor1():
             Diamond_Armour = False
             ACM_Armour = False
             BunSamosa_Armour = False
-             Gold_Armour=False
-            Silver_Armour =False
+            Gold_Armour = False
+            Silver_Armour = False
 
         else:
             L_shop_armors_armor1 = Label(frame_shop_armors_no, text="You don't have enough gold.\n"
