@@ -28,7 +28,7 @@ Mythril_Sword = False  # increases attack by 30
 Orichalium_Sword = False  # increases attack by 40
 Iron_Armour = False  # decreases opp_att by 10
 Mythril_Armour = False  # decreases opp_att by 20
-Orichalium_Armour = False  # decereases opp_att by 30
+Orichalium_Armour = False  # decreases opp_att by 30
 potion = 1  # increases hp by 30. Cost=300 gold
 ultra_potion = 1  # increases hp by 50. Cost=600 gold
 medium_potion = 1  # increases hp by 40. cost=450 gold
@@ -50,12 +50,13 @@ def fight():
         typing("Would you like to attack or use potion??\n")
         d = int(float(input("1=Attack, 2=Use potions\n")))
         # for invalid inputs of d
-        while 1 != d != 2 :
+        while d !=(1,2):
             typing("Invalid input. Try again.\n")
             d = int(input("1=Attack, 2=Use potion\n"))
-            if d in (2, 1): break
+            if d in (1,2): 
+                break
 
-        if d - 1: # If user decides to attack
+        if d == 2: # If user decides to use potion
             typing("Which potion would you like to drink?\n")
             which_potion = input("1=Potion, 2=Ultra Potion, 3=Medium Potion\n")
 
@@ -79,7 +80,7 @@ def fight():
                     elif not medium_potion: typing("You don't have a medium potion with you.\n")
                 case _: typing("Invalid input. You lose your chance.\n")
             typing(f"Your HP={hp}\n")
-        else: # If user decided to use potion
+        else: # If user decided to use attack
             userattack = random.randint(40, 70)
             typing("You will do the attack now\n")
             opp_hp = opp_hp - userattack
@@ -90,7 +91,8 @@ def fight():
             elif opp_hp <= 0: typing(f"Monster's HP={(opp_hp:=0)}\n")
 
         # Monster's turn to attack
-        if opp_hp <= 0: continue
+        if opp_hp <= 0: 
+            continue
         elif opp_hp != 0:
             typing("Now monster will take it's turn.\n")
             opp_attack = random.randint((m - 1) * 10, m * 10)
@@ -98,7 +100,7 @@ def fight():
             if Orichalium_Armour: hp += 30
             elif Mythril_Armour: hp += 20
             elif Iron_Armour: hp += 10
-            print(f"Your HP={hp}\n")
+            print(f"Your HP={hp}\n") 
 
 
 def potion_time():
@@ -112,7 +114,8 @@ def potion_time():
     while int(a) != 2 and int(a) != 1:
         typing("Invalid input. Try again.\n")
         a = input("1=Yes, 2=No\n")
-        if int(a) in (2,1): break
+        if int(a) in (2,1): 
+            break
 
             # If user wants to utilize potion break
     if int(a) == 1:
@@ -161,13 +164,14 @@ def shopping():
     typing("Welcome to the store..\n")
     typing("What would you like to buy?\n")
     # store1 variable to ask user what necessity do they need to buy
-    store1 = input("1=Potion, 2=Sword, 3=Armor, 4=Exit Store\n")
+    store1 = input("1=Potion, 2=Sword, 3=Armour, 4=Exit Store\n")
 
     # if invalid input..
     while int(store1) != 1 and int(store1) != 2 and int(store1) != 3 and int(store1) != 4:
         typing("Invalid Input. Try again\n")
-        store1 = input("1=Potion, 2=Sword, 3=Armor, 4=Exit Store\n")
-        if int(store1) in (1,2,3,4): break
+        store1 = input("1=Potion, 2=Sword, 3=Armour, 4=Exit Store\n")
+        if int(store1) in (1,2,3,4): 
+            break
 
     # If user wants to buy potions
     if int(store1) == 1:
@@ -183,7 +187,7 @@ def shopping():
             typing("Invalid input. Try again")
             z = int(input("1=Yes, 2=No"))
 
-        if z - 1: typing("Okay then..")  # if user doesn't need to know about potions
+        if z == 1: typing("Okay then..")  # if user doesn't need to know about potions
         else:  # if user wants to know about potions
             typing("Small potion that costs 250 gold will increase your HP by 30")
             typing("And..")
@@ -199,7 +203,7 @@ def shopping():
             typing("Invalid input. Try again")
             shop_potion = int(input("1=Small Potion, 2=Ultra Potion, 3=Medium potion"))
 
-        # If user wantes to buy small potion
+        # If user wants to buy small potion
         match shop_potion:
             case 1:
                 typing("How many Small potions would you like to buy?\n")
@@ -332,86 +336,86 @@ def shopping():
                     typing("Let's continue shopping..")
                     shopping()
 
-    # If user wants to buy armors
+    # If user wants to buy armours
     if int(store1) == 3:
-        # Checking what Armor does the user currently has..
-        if armor1 and not armor2 and not armor3: typing("Right now, you have Armor1")
-        elif not armor1 and armor2 and not armor3: typing("Right now you have Armor2")
-        elif not armor1 and not armor2 and armor3: typing("Right now you have Armor3")
-        typing("We have 3 types of armors..")
-        typing("Armor1, Armor2, Armor3")
+        # Checking what Armour does the user currently has..
+        if Iron_Armour and not Mythril_Armour and not Orichalium_Armour: typing("Right now, you have Iron_Armour")
+        elif not Iron_Armour and Mythril_Armour and not Orichalium_Armour: typing("Right now you have Mythril_Armour")
+        elif not Iron_Armour and not Mythril_Armour and Orichalium_Armour: typing("Right now you have Orichalium Armour")
+        typing("We have 3 types of armours..")
+        typing("Iron Armour, Mythril Armour, Orichalium Armour")
         typing("Would you like to know more about them?")
 
         # for invalid input of x
         while (x := input("1=Yes, 2=No")) not in (1, 2):
             typing("Invalid input. Try again")
 
-        # If user wants to know about armors
-        if int(x) - 1: typing("Okay then..")
+        # If user wants to know about armours
+        if int(x) == 1: typing("Okay then..")
         else:
-            typing("Armor1 costs 100 gold and increases your defense by 10\n")
+            typing("Iron Armour costs 100 gold and increases your defense by 10\n")
             typing("Sword2 costs 200 gold and increases your defense by 20\n")
             typing("Sword3 costs 300 gold and increases your defense by 30\n")
 
 
-        # asking user about which armor that they wants to buy
-        typing("Which armor would you like to buy?\n")
+        # asking user about which armour that they wants to buy
+        typing("Which armour would you like to buy?\n")
 
-        # checking for incorrect inputs for shop_armor
-        while (shop_armor := input("1=Armor1, 2=Armor2, 3=Armor3")) not in (1,2,3):
+        # checking for incorrect inputs for shop_armour
+        while (shop_armour := input("1=Iron Armour, 2=Mythril Armour, 3=Orichalium_Armour")) not in (1,2,3):
             typing("Invalid Input. Try again")
 
-                # If user wants armor1
-        if int(shop_armor) == 1:
-            # If user already has armor1
-            if armor1: typing("You are already carrying Armor1")
+                # If user wants Iron_Armour
+        if int(shop_armour) == 1:
+            # If user already has Iron_Armour
+            if Iron_Armour: typing("You are already carrying Iron Armour")
             # If user doesn't have enough gold.
             elif gold < 100:
                 typing("You don't have enough gold.")
                 print(f"You own {gold} gold.")
-            # Purchasing armor1 and completing the transaction.
-            elif armor1:
-                armor1 = True
-                armor2 = False
-                armor3 = False
-                typing("You now have Armor1")
+            # Purchasing Iron_Armour and completing the transaction.
+            elif Iron_Armour:
+                Iron_Armour = True
+                Mythril_Armour = False
+                Orichalium_Armour = False
+                typing("You now have Iron Armour")
                 print(f"You are left with {(gold:=gold - 100)} gold left")
                 typing("Let's continue shopping...")
                 shopping()
 
-        # If user wants to buy armor2
-        elif int(shop_armor) == 2:
-            # If user already has armor2
-            if armor2: typing("You are already carrying Armor2")
+        # If user wants to buy Mythril_Armour
+        elif int(shop_armour) == 2:
+            # If user already has Mythril_Armour
+            if Mythril_Armour: typing("You are already carrying Mythril Armour")
             # If user doesn't have enough gold.
             elif gold < 200:
                 typing("You don't have enough gold..")
                 print(f"You own {gold} gold.")
-            # Purchasing armor2 and completing the transaction.
-            elif armor2:
-                armor1 = False
-                armor2 = True
-                armor3 = False
-                typing("You now have Armor2.")
+            # Purchasing Mythril_Armour and completing the transaction.
+            elif Mythril_Armour:
+                Iron_Armour = False
+                Mythril_Armour = True
+                Orichalium_Armour = False
+                typing("You now have Mythril Armour.")
                 print(f"You are left with {(gold:= gold - 200)} gold.")
                 typing("Let's continue shopping.")
                 shopping()
 
-        # If user wants to buy Armor3
-        elif int(shop_armor) == 3:
+        # If user wants to buy Orichalium_Armour
+        elif int(shop_armour) == 3:
             # If user already has sword3
-            if armor3:
-                typing("You are already carrying Armor3")
+            if Orichalium_Armour:
+                typing("You are already carrying Orichalium Armour")
             # If user doesn't have enough gold for sword3
             elif gold < 300:
                 typing("You don't have enough gold.")
                 print(f"You own {gold} gold.")
-            # Purchasing armor3 and completing the transaction
+            # Purchasing Orichalium_Armour and completing the transaction
             else:
-                armor1 = False
-                armor2 = False
-                armor3 = True
-                typing("You now have Armor3")
+                Iron_Armour = False
+                Mythril_Armour = False
+                Orichalium_Armour = True
+                typing("You now have Orichalium Armour")
                 print(f"You are left with {(gold:= gold - 300)} gold.")
                 typing("Let's continue shopping..")
                 shopping()

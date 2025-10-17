@@ -560,8 +560,7 @@ def shop_armor_armor1():
     if Iron_Armour == False:
         if gold > 200:
             gold = gold - 200
-            L_shop_armors_armor1 = Label(frame_shop_armors_no, text="You now have Iron_Armour\n"
-                                                                    f"You now have {gold} gold")
+            L_shop_armors_armor1 = Label(frame_shop_armors_no, text="You now have Iron_Armour\n"f"You now have {gold} gold")
             L_shop_armors_armor1.pack()
             Iron_Armour = True
             Mythril_Armour = False
@@ -570,7 +569,7 @@ def shop_armor_armor1():
             Diamond_Armour = False
             ACM_Armour = False
             BunSamosa_Armour = False
-             Gold_Armour=False
+            Gold_Armour=False
             Silver_Armour =False
 
         else:
@@ -607,7 +606,7 @@ def shop_armor_armor2():
             Diamond_Armour = False
             ACM_Armour = False
             BunSamosa_Armour = False
-             Gold_Armour=False
+            Gold_Armour=False
             Silver_Armour =False
 
         else:
@@ -644,7 +643,7 @@ def shop_armor_armor3():
             Diamond_Armour = False
             ACM_Armour = False
             BunSamosa_Armour = False
-             Gold_Armour=False
+            Gold_Armour=False
             Silver_Armour =False
 
         else:
@@ -683,7 +682,7 @@ def shop_armor_armor4():
             Diamond_Armour = False
             ACM_Armour = False
             BunSamosa_Armour = False
-             Gold_Armour=False
+            Gold_Armour=False
             Silver_Armour =False
 
         else:
@@ -722,7 +721,7 @@ def shop_armor_armor5():
             Diamond_Armour = True
             ACM_Armour = False
             BunSamosa_Armour = False
-             Gold_Armour=False
+            Gold_Armour=False
             Silver_Armour =False
 
         else:
@@ -759,7 +758,7 @@ def shop_armor_armor6():
             Diamond_Armour = False
             ACM_Armour = True
             BunSamosa_Armour = False
-             Gold_Armour=False
+            Gold_Armour=False
             Silver_Armour =False
 
         else:
@@ -794,7 +793,7 @@ def shop_armor_armor7():
             Diamond_Armour = False
             ACM_Armour = False
             BunSamosa_Armour = True
-             Gold_Armour=False
+            Gold_Armour=False
             Silver_Armour =False
 
         else:
@@ -829,7 +828,7 @@ def shop_armor_armor8():
             Diamond_Armour = False
             ACM_Armour = False
             BunSamosa_Armour = False
-             Gold_Armour=False
+            Gold_Armour=False
             Silver_Armour =True
 
         else:
@@ -864,7 +863,7 @@ def shop_armor_armor9():
             Diamond_Armour = False
             ACM_Armour = False
             BunSamosa_Armour = False
-             Gold_Armour=True
+            Gold_Armour=True
             Silver_Armour =False
 
         else:
