@@ -5,6 +5,10 @@ import time
 
 import random
 
+monster = ""  # to store the current monster
+turn = 1  # to keep track of turns in battle
+ability = "" # abikity of the monster
+reward = 0  # reward after defeating a monster
 gold = 1500  # used in store to buy items
 hp = 100  # user's hp
 opp_hp = 100  # monster's hp
@@ -28,33 +32,33 @@ ultra_potion = 1  # increases hp by 50. Cost=600 gold
 medium_potion = 1  # increases hp by 40, cost=450 gold
 # variable that lets you select the potion that you want to take.
 which_potion = 0
+rav = 0  # the current room number
 monsters_defeated = 0
 rooms_cleared = 0
 gold_earned = 0
 monsterCountAtGameEnd = 40
 
 def get_room():
-    rav = 1
+    global rav
+    rav += 1
     if (rav % 20 != 0):  # a loop to make sure that the bossmonster doesnt appear until upto 20 iterations in the game
-        rav += 1
         #room = ("monster", "shop", "treasure box", "monster", "shop")
         #inside_room = random.choice(room)
         # print(inside_room)
         prob_treasure = random.random()
-        if prob_treasure > 0.7:
+        if prob_treasure > 0.8:
             frame1.destroy()
             treasure_box()
         else:
             prob_mons_shop = random.random()
             if prob_mons_shop > 0.5:
                 frame1.destroy()
-                get_monster()
+                get_monster(rav)
             else:
                 frame1.destroy()
                 shop()
 
     else:
-        rav += 1
         frame1.destroy()
         get_bossmonster()
 
@@ -563,7 +567,8 @@ def shop_armor_armor1():
     if Iron_Armour == False:
         if gold > 200:
             gold = gold - 200
-            L_shop_armors_armor1 = Label(frame_shop_armors_no, text="You now have Iron_Armour\n"f"You now have {gold} gold")
+            L_shop_armors_armor1 = Label(frame_shop_armors_no, text="You now have Iron_Armour\n"
+                                                                    f"You now have {gold} gold")
             L_shop_armors_armor1.pack()
             Iron_Armour = True
             Mythril_Armour = False
@@ -599,8 +604,7 @@ def shop_armor_armor2():
     if Mythril_Armour == False:
         if gold > 300:
             gold = gold - 300
-            L_shop_armors_armor2 = Label(frame_shop_armors_no, text="You now have Mythril_Armour\n"
-                                                                    f"You now have {gold} gold")
+            L_shop_armors_armor2 = Label(frame_shop_armors_no, text="You now have Mythril_Armour\n"f"You now have {gold} gold")
             L_shop_armors_armor2.pack()
             Iron_Armour = False
             Mythril_Armour = True
@@ -916,6 +920,11 @@ def shop():
     global Diamond_Armour
     global Gold_Armour
     global Silver_Armour
+    try:
+        frame_shop_1.destroy()
+    except NameError:
+        pass
+
     frame_shop_1 = Frame(root)
     frame_shop_1.pack()
     L_Shop_Wel = Label(
@@ -1057,15 +1066,48 @@ def restart_game():
     frame_monster_attack_1.destroy()
     get_room()
 
+def Special_ability_heal():
+    global monster
+    global ability
+    global opp_hp
+    global turn
+    if turn > 2:
+        return
+    else:
+        heal = opp_hp * 0.1
+        L_monster_heal = Label(frame_monster_attack_1, text=f"{monster} uses {ability} and heals {heal} HP, Monster HP: {opp_hp}")
+
+        L_monster_heal.pack()
+        opp_hp = opp_hp + heal
+
 
 def monster_counterattack_1():
+    global monster
+    global ability
+    global turn
     global hp
+    turn += 1
     L_monster_counterattack_1 = Label(
         frame_monster_attack_1, text=f"Now {monster} will take it's turn.\n")
     L_monster_counterattack_1.pack()
-    opp_attack = random.randint(((m - 1) * 10), (m * 10))
-    hp = hp - opp_attack
 
+    if ability == "heal":
+        Special_ability_heal()
+    opp_attack = random.randint(((m - 1) * 10), (m * 10)) // 10
+    if ability == "shield" and turn <= 2:
+        opp_attack = opp_attack // 2
+        L_monster_shield = Label(frame_monster_attack_1, text=f"{monster} uses {ability}, Its attack power is halfed this turn")
+        L_monster_shield.pack()
+    hp = hp - opp_attack
+    if ability == "double attack" and turn <= 3:
+        opp_attack = random.randint(((m - 1) * 10), (m * 10)) // 10
+        L_monster_double = Label(frame_monster_attack_1, text=f"{monster} uses {ability}, It will attack twice this turn")
+        L_monster_double.pack()
+        hp = hp - opp_attack2
+
+    if ability == "poison" and turn <= 3:
+        poison_damage = 5
+        hp = hp - poison_damage
     if Iron_Armour == True:
         hp = hp + 10
     elif Mythril_Armour == True:
@@ -1079,7 +1121,6 @@ def monster_counterattack_1():
             frame_monster_attack_1, text=f"Your HP={hp}\n", fg="#537A5A")
         L_monster_counterattack_result.pack()
         you_died()
-
 
     
 
@@ -1107,10 +1148,15 @@ def monster_counter_to_attack():
 
 
 def monster_attack_1():
+    global gold
+    global reward
     global opp_hp
     global monsters_defeated
     global frame_monster_attack_1
-    frame_monster_1.destroy()
+    try:
+        frame_monster_attack_1.destroy()
+    except NameError:
+        pass
     frame_monster_attack_1 = Frame(root)
     frame_monster_attack_1.pack()
     L_monster_attack_1 = Label(
@@ -1134,8 +1180,10 @@ def monster_attack_1():
         monster_counterattack_1()
 
     if opp_hp <= 0:
+        turn = 1
         monsters_defeated += 1
         opp_hp = 0
+        gold = gold + reward
         L_monster_attack_result = Label(frame_monster_attack_1, text=f"{monster}'s HP={opp_hp}\n"
                                                                      f"Your HP = {hp}\n", fg="#537A5A"
                                                                      f"you defeated {monster}\n"
@@ -1211,7 +1259,6 @@ def fight_monster_to_monster_attack():
 
 def fight_monster_to_monster_potion():
     frame_fight_monster.destroy()
-    frame_monster_1.destroy()
     monster_potion_1()
 
 
@@ -1220,6 +1267,12 @@ def fight_monster():
     global opp_hp
     global hp
     global frame_fight_monster
+    
+    try:
+        frame_fight_monster.destroy()
+    except NameError:
+        pass
+
     frame_fight_monster = Frame(root)
     frame_fight_monster.pack()
     L_monster_intro = Label(frame_fight_monster, text=f"Your HP = {hp}\n"
@@ -1234,238 +1287,110 @@ def fight_monster():
     B_monster_potion_1.pack()
 
 
-def get_monster():
+def get_monster(rav):
+    global ability
     global m
     global opp_hp
     global monster
     global frame_monster_1
+    global reward
     frame_monster_1 = Frame(root)
     frame_monster_1.pack()
     L_monster_Wel = Label(frame_monster_1, text="You have to fight a monster.", font=("Helvetica", 16))
     L_monster_Wel.pack()
 
+    try:
+        frame_monster_1.destroy()
+    except:
+        pass
 
+    frame_monster_1 = Frame(root)
+    frame_monster_1.pack()
 
-    monsters = ("Goblin", "Werewolf", "Basilisk", "Minotaur", "Griffin", "Dragon", "Mike", "Dave","severus","snape","orc","dark elf","Siri","GrimReaper","Dementor","UrGhast","Lola", "Cyclop","Robert","Carlson","golum","rhegar")
+    EASY_MONSTERS = ("Goblin", "Werewolf", "Golum", "Rhegar", "Basilisk")
+    MEDIUM_MONSTERS = ("Minotaur", "Orc", "Griffin", "Lola")
+    HARD_MONSTERS = ("Dragon", "Cyclop", "Mike", "Dark Elf")
+    EXPERT_MONSTERS = ("Dave", "Siri", "GrimReaper", "Dementor", "UrGhast", "Robert", "Carlson", "Severus", "Snape")
 
+    EASY_REWARD = 20
+    MEDIUM_REWARD = 50
+    HARD_REWARD = 80
+    EXPERT_REWARD = 120
 
-    monster = random.choice(monsters)
-    # print(monster)
     opp_hp = 100
-    if monster == "Goblin":
-        m = 1
-        # monster 1
-        # Attack in range of 0-10
-        L_m1_intro = Label(frame_monster_1, text="You have to face Goblin\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m1_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(0, 10)
+
+    monster_prob = random.random()
+
+    if 1 <= rav <= 5:
+        if monster_prob < 0.8:
+            monster = random.choice(EASY_MONSTERS)
+            reward = EASY_REWARD
+            ability = "heal"
+        else:
+            monster = random.choice(MEDIUM_MONSTERS)
+            reward = MEDIUM_REWARD
+            opp_hp = 120
+            ability = "poison"
+    elif 6 <= rav <= 10:
+        if monster_prob < 0.2:
+            monster = random.choice(EASY_MONSTERS)
+            reward = EASY_REWARD
+            ability = "heal"
+        elif 0.2 <= monster_prob <= 0.8:
+            monster = random.choice(MEDIUM_MONSTERS)
+            reward = MEDIUM_REWARD
+            opp_hp = 120
+            ability = "poison"
+        else:
+            monster = random.choice(HARD_MONSTERS)
+            reward = HARD_REWARD
+            opp_hp = 150
+            ability = "shield"
+    elif 11 <= rav <= 15:
+        if monster_prob < 0.4:
+            monster = random.choice(MEDIUM_MONSTERS)
+            reward = MEDIUM_REWARD
+            opp_hp = 120
+            ability = "poison"
+        elif 0.4 <= monster_prob <= 0.8:
+            monster = random.choice(HARD_MONSTERS)
+            reward = HARD_REWARD
+            opp_hp = 150
+            ability = "shield"
+        else:
+            monster = random.choice(EXPERT_MONSTERS)
+            reward = EXPERT_REWARD
+            opp_hp = 200
+            ability = "double attack"
+    elif 16 <= rav <= 19:
+        if monster_prob < 0.2:
+            monster = random.choice(HARD_MONSTERS)
+            reward = HARD_REWARD
+            opp_hp = 150
+            ability = "shield"
+        else:
+            monster = random.choice(EXPERT_MONSTERS)
+            reward = EXPERT_REWARD
+            opp_hp = 200
+            ability = "double attack"
+
+    monster_lower = monster.lower()
     
-    if monster == "golum":
-        m = 13
-        # monster 13
-        # Attack in range of 10-20
-        L_m2_intro = Label(frame_monster_1, text="You have to face Golum\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m2_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(10, 20)
-
-    if monster == "rhegar":
-        m = 14
-        # monster 14
-        # Attack in range of 10-20
-        L_m2_intro = Label(frame_monster_1, text="You have to face Rhegar\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m2_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(10, 20)
-
-    if monster == "Werewolf":
-        m = 2
-        # monster 2
-        # Attack in range of 10-20
-        L_m2_intro = Label(frame_monster_1, text="You have to face Werewolf\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m2_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(10, 20)
-
-    if monster == "Basilisk":
-        m = 3
-        # monster 3
-        # Attack in range of 20-30
-        L_m3_intro = Label(frame_monster_1, text="You have to face Basilisk\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m3_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(20, 30)
-
-    if monster == "Minotaur":
-        m = 4
-        # monster 4
-        # Attack in range of 30-40
-        L_m4_intro = Label(frame_monster_1, text="You have to face Minotaur\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m4_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(30, 40)
-
-    if monster == "Griffin":
-        m = 5
-        # monster 5
-        # Attack in range of 40-50
-        L_m5_intro = Label(frame_monster_1, text="You have to face Griffin\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m5_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(40, 50)
-
-    if monster == "Dragon":
-        m = 6
-        # monster 6
-        # Attack in range of 50-60
-        L_m6_intro = Label(frame_monster_1, text="You have to face Dragon\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m6_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(50, 60)
-
-    if monster == "orc":
-        m = 9
-        # monster 9
-        # Attack in range of 30-40
-        L_m9_intro = Label(frame_monster_1, text="You have to face orc\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m9_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(30, 40)
-
-    if monster == "darkelf":
-        m = 10
-        # monster 10
-        # Attack in range of 60-70
-        L_m10_intro = Label(frame_monster_1, text="You have to face Dark Elf\n"
-                            "The match starts. You get the first chance\n")
-        L_m10_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(60, 70)
-
-    if monster == "Mike":
-        m = 7
-        # monster 7
-        # Attack in range of 60-70
-        L_m7_intro = Label(frame_monster_1, text="You have to face Mike\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m7_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(60, 70)
-
-    if monster == "Dave":
-        m = 8
-        # monster 8
-        # Attack in range of 70-80
-        L_m8_intro = Label(frame_monster_1, text="You have to face Dave\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m8_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(70, 80)
-    if monster == "severus":
-        m = 11
-        # monster 11
-        # Attack in range of 80-90
-        L_m1_intro = Label(frame_monster_1, text="You have to face severus\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m1_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(80,90)
-    if monster == "snape":
-        m = 12
-        # monster 12
-        # Attack in range of 90-100
-        L_m1_intro = Label(frame_monster_1, text="You have to face snape\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m1_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(90,100)
-    if monster == "Lola":
-        m = 19
-        # monster 19
-        # Attack in range of 40-70
-        L_m19_intro = Label(frame_monster_1, text="You have to face Lola\n"
-                            "The match starts. You get the first chance\n")
-        L_m19_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(50, 60)
-
-    if monster == "Cyclop":
-        m = 20
-        # monster 20
-        # Attack in range of 50-70
-        L_m20_intro = Label(frame_monster_1, text="You have to face Cyclop\n"
-                            "The match starts. You get the first chance\n")
-        L_m20_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(50, 60)
-
-    if monster == "Siri":
-        m = 13
-        # monster 13
-        # Attack in range of 70-80
-        L_m9_intro = Label(frame_monster_1, text="You have to face Siri\n"
-                                                 "The match starts. You get the first chance\n")
-        L_m9_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(70, 80)
-    if monster == "GrimReaper":
-        m = 14
-        # monster 14
-        # Attack in range of 70-80
-        L_m10_intro = Label(frame_monster_1, text="You have to face Dave\n"
-                            "The match starts. You get the first chance\n")
-        L_m10_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(70, 80)
-
-    if monster == "dementor":
-        m = 15
-        # monster 15
-        # Attack in range of 70-80
-        L_m10_intro = Label(frame_monster_1, text="You have to face A Dementor\n"
-                            "The match starts. You get the first chance as your life\n")
-        L_m10_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(70, 80)
-    if monster == "UrGhast":
-        m = 16
-        # monster 16
-        # Attack in range of 70-80
-        L_m10_intro = Label(frame_monster_1, text="You have to face UrMom (A UrGhast)\n"
-                            "The match starts. You get the first chance\n")
-        L_m10_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(70, 80)
-    if monster == "Robert":
-        m = 17
-        # monster 17
-        # Attack in range of 70-80
-        L_m10_intro = Label(frame_monster_1, text="You have to face Robert\n"
-                            "The match starts. You get the first chance\n")
-        L_m10_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(70, 80)
-
-    if monster == "Carlson":
-        m = 18
-        # monster 18
-        # Attack in range of 70-80
-        L_m10_intro = Label(frame_monster_1, text="You have to face Carlson\n"
-                            "The match starts. You get the first chance\n")
-        L_m10_intro.pack()
-        fight_monster()
-        # opp_att = random.randint(70, 80)
-
+    m_values = {
+        "goblin": 1, "golum": 13, "rhegar": 14, "werewolf": 2, "basilisk": 3,
+        "minotaur": 4, "griffin": 5, "dragon": 6, "orc": 9, "dark elf": 10,
+        "mike": 7, "dave": 8, "severus": 11, "snape": 12, "lola": 19,
+        "cyclop": 20, "siri": 13, "grimreaper": 14, "dementor": 15,
+        "urghast": 16, "robert": 17, "carlson": 18
+    }
+    
+    m = m_values.get(monster_lower, 1)
+    
+    L_m_intro = Label(frame_monster_1, text=f"You have to face {monster}\n"
+                                           "The match starts. You get the first chance\n")
+    L_m_intro.pack()
+    
+    fight_monster()
 
 def quit_screen():
     quit_scr = Label(frame_monster_1, text="Game over")
@@ -1525,7 +1450,7 @@ def inventory():
     global ACM_Armour
     global Silver_Armour
     global Gold_Armour 
-    newWindow = Toplevel(root)
+    newWindow = Toplevel(root)  
  
     newWindow.title("inventory")
  
